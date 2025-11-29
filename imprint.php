@@ -165,7 +165,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <p class="footer-text">
-                    Copyright 2025, YOUR NAME OR COMPANY<br>
+                    Copyright 2025, <a href="https://rauscher.xyz" style="color: inherit; text-decoration: none;" target="_blank" rel="noopener">George A. Rauscher</a><br>
                     Version 2.2.0 - Zero-Knowledge Encryption
                 </p>
             </div>
