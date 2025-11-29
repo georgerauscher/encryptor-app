@@ -24,7 +24,7 @@ Thank you for your interest in contributing! This project is built by [George A.
 #### Before You Start
 - **Discuss major changes** in an issue first
 - **Follow code style guidelines**
-- **Read Murphy's Law section** - we work minimalinvasively
+- **Work minimalinvasively**
 
 #### Code Style
 - **No emojis** in code or documentation
