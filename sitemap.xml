@@ -1,81 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   SITEMAP for encryptor.app
-  Version 2.0 - "Dream of Freedom"
-  
-  This sitemap helps search engines discover our privacy tool
-  so whistleblowers, journalists, and activists can find it
-  when they need protection most.
-  
-  Built by George A. Rauscher
-  Forensic Expert | Privacy Advocate
-  
-  Last Updated: 2025-10-28
+  Version 2.2.0 - "Zero-Knowledge Encryption"
+  Last Updated: 2025-11-29
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <!-- HOMEPAGE - Main entry point -->
+  <!-- HOMEPAGE -->
   <url>
     <loc>https://yourdomain.com/</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://yourdomain.com/og_image.jpg</image:loc>
-      <image:title>encryptor.app - Military-Grade Text Encryption</image:title>
-      <image:caption>Zero-knowledge AES-256-GCM encryption. Built for freedom.</image:caption>
-    </image:image>
   </url>
   
-  <!-- ENCRYPT PAGE - Core functionality -->
+  <!-- ENCRYPT TEXT -->
   <url>
     <loc>https://yourdomain.com/encrypt.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- DECRYPT PAGE - Core functionality -->
+  <!-- DECRYPT TEXT -->
   <url>
     <loc>https://yourdomain.com/decrypt.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ENCRYPT FILE -->
+  <url>
+    <loc>https://yourdomain.com/encrypt-file.html</loc>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- PRIVACY POLICY - Legal & transparency -->
+  <!-- DECRYPT FILE -->
+  <url>
+    <loc>https://yourdomain.com/decrypt-file.html</loc>
+    <lastmod>2025-11-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- PRIVACY POLICY -->
   <url>
     <loc>https://yourdomain.com/privacy.php</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
-  <!-- IMPRINT - Legal information -->
+  <!-- IMPRINT -->
   <url>
     <loc>https://yourdomain.com/imprint.php</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
-  <!-- LLMS.TXT - Documentation for AI systems -->
+  <!-- LLMS.TXT -->
   <url>
     <loc>https://yourdomain.com/llms.txt</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2025-11-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- AI.TXT - AI training opt-out -->
-  <url>
-    <loc>https://yourdomain.com/ai.txt</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
 
 </urlset>
-
