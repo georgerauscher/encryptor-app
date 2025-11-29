@@ -508,7 +508,7 @@ tail -f /var/log/mail.log
 
 **Check permissions:**
 ```bash
-ls -l /var/www/vhosts/encryptor.app/smtp-config.php
+ls -l ../smtp-config.php
 # Should be: -rw------- (600) www-data:www-data
 ```
 
@@ -536,7 +536,7 @@ sudo chown -R www-data:www-data /var/www/mysite/logs
 ```bash
 find /var/www/mysite/httpdocs -type f -exec chmod 644 {} \;
 find /var/www/mysite/httpdocs -type d -exec chmod 755 {} \;
-chmod 600 /var/www/vhosts/encryptor.app/smtp-config.php
+chmod 600 ../smtp-config.php
 ```
 
 ### JavaScript Not Working
@@ -578,7 +578,7 @@ find /var/www/mysite/httpdocs -type f -exec chmod 644 {} \;
 find /var/www/mysite/httpdocs -type d -exec chmod 755 {} \;
 
 # SMTP config (CRITICAL!)
-chmod 600 /var/www/vhosts/encryptor.app/smtp-config.php
+chmod 600 ../smtp-config.php
 
 # Logs
 chmod 755 /var/www/mysite/logs
@@ -683,7 +683,7 @@ mkdir -p $BACKUP_DIR
 # Backup files
 tar -czf $BACKUP_DIR/encryptor_$DATE.tar.gz \
   /var/www/mysite/httpdocs \
-  /var/www/vhosts/encryptor.app/smtp-config.php \
+  ../smtp-config.php \
   --exclude='/var/www/mysite/httpdocs/vendor' \
   --exclude='/var/www/mysite/httpdocs/logs'
 
