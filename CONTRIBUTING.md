@@ -30,7 +30,7 @@ Thank you for your interest in contributing! This project is built by [George A.
 - **No emojis** in code or documentation
 - **No hardcoding** - use config files
 - **English comments** in code
-- **German error messages** in UI (for users)
+- **English error messages** in UI (for users)
 - **Clean, readable code** - "handcoded look"
 
 #### Testing Requirements
