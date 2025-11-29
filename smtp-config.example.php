@@ -3,7 +3,7 @@
  * encryptor.app - SMTP Configuration (Example)
  * 
  * Copy this file to:
- *   - /var/www/vhosts/encryptor.app/smtp-config.php (recommended, outside web root)
+ *   - ../smtp-config.php (recommended, outside web root)
  *   - OR same directory as send-contact.php (less secure)
  * 
  * Adjust permissions:

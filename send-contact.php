@@ -43,7 +43,7 @@ if (!$smtpConfig) {
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
-ini_set('error_log', '/var/www/encryptor.app/logs/contact-security.log');
+ini_set('error_log', __DIR__ . '/logs/contact-security.log');
 
 // Headers
 header('Content-Type: application/json; charset=utf-8');
@@ -280,7 +280,7 @@ function checkEmailPattern(string $email): bool {
 }
 
 function logSpamAttempt(string $ip, string $email, string $name, string $message, string $reason): void {
-    $logFile = '/var/www/encryptor.app/logs/spam-attempts.log';
+    $logFile = __DIR__ . '/logs/spam-attempts.log';
     $timestamp = date('Y-m-d H:i:s') . ' UTC';
     $logEntry = sprintf(
         "[%s] SPAM BLOCKED - IP: %s | Email: %s | Name: %s | Reason: %s\n",

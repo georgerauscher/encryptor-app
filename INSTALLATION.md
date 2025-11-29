@@ -99,8 +99,8 @@ sudo apt install -y nginx php8.3-fpm php8.3-cli php8.3-curl php8.3-mbstring php8
 
 ```bash
 # Create web directory
-sudo mkdir -p /var/www/encryptor.app
-cd /var/www/encryptor.app
+sudo mkdir -p /var/www/mysite
+cd /var/www/mysite
 
 # Clone repository
 sudo git clone https://github.com/georgerauscher/encryptor-app.git httpdocs
@@ -124,9 +124,9 @@ ls -la vendor/phpmailer/
 
 ```bash
 # Create logs directory
-mkdir -p /var/www/encryptor.app/logs
-chmod 755 /var/www/encryptor.app/logs
-chown www-data:www-data /var/www/encryptor.app/logs
+mkdir -p /var/www/mysite/logs
+chmod 755 /var/www/mysite/logs
+chown www-data:www-data /var/www/mysite/logs
 
 # Security directory already exists (from git)
 chmod 755 security/
@@ -244,7 +244,7 @@ server {
     listen [::]:443 ssl http2;
     server_name encryptor.app www.encryptor.app;
     
-    root /var/www/encryptor.app/httpdocs;
+    root /var/www/mysite/httpdocs;
     index index.html;
     
     # SSL Configuration (Let's Encrypt)
@@ -312,7 +312,7 @@ sudo nano /etc/apache2/sites-available/encryptor.app.conf
 <VirtualHost *:80>
     ServerName encryptor.app
     ServerAlias www.encryptor.app
-    DocumentRoot /var/www/encryptor.app/httpdocs
+    DocumentRoot /var/www/mysite/httpdocs
     
     # Redirect HTTP to HTTPS
     Redirect permanent / https://yourdomain.com/
@@ -321,7 +321,7 @@ sudo nano /etc/apache2/sites-available/encryptor.app.conf
 <VirtualHost *:443>
     ServerName encryptor.app
     ServerAlias www.encryptor.app
-    DocumentRoot /var/www/encryptor.app/httpdocs
+    DocumentRoot /var/www/mysite/httpdocs
     
     # SSL Configuration
     SSLEngine on
@@ -335,7 +335,7 @@ sudo nano /etc/apache2/sites-available/encryptor.app.conf
     Header always set X-XSS-Protection "1; mode=block"
     
     # Directory Configuration
-    <Directory /var/www/encryptor.app/httpdocs>
+    <Directory /var/www/mysite/httpdocs>
         Options -Indexes +FollowSymLinks
         AllowOverride All
         Require all granted
@@ -487,7 +487,7 @@ curl -X POST http://localhost/send-contact.php \
 # Expected: {"ok":false,"message":"..."}
 
 # Check logs
-tail -f /var/www/encryptor.app/logs/spam-attempts.log
+tail -f /var/www/mysite/logs/spam-attempts.log
 ```
 
 ---
@@ -516,7 +516,7 @@ ls -l /var/www/vhosts/encryptor.app/smtp-config.php
 
 **Check web root:**
 ```bash
-ls -la /var/www/encryptor.app/httpdocs/index.html
+ls -la /var/www/mysite/httpdocs/index.html
 ```
 
 **Check Nginx config:**
@@ -528,14 +528,14 @@ sudo nginx -t
 
 **Fix ownership:**
 ```bash
-sudo chown -R www-data:www-data /var/www/encryptor.app/httpdocs
-sudo chown -R www-data:www-data /var/www/encryptor.app/logs
+sudo chown -R www-data:www-data /var/www/mysite/httpdocs
+sudo chown -R www-data:www-data /var/www/mysite/logs
 ```
 
 **Fix permissions:**
 ```bash
-find /var/www/encryptor.app/httpdocs -type f -exec chmod 644 {} \;
-find /var/www/encryptor.app/httpdocs -type d -exec chmod 755 {} \;
+find /var/www/mysite/httpdocs -type f -exec chmod 644 {} \;
+find /var/www/mysite/httpdocs -type d -exec chmod 755 {} \;
 chmod 600 /var/www/vhosts/encryptor.app/smtp-config.php
 ```
 
@@ -548,8 +548,8 @@ chmod 600 /var/www/vhosts/encryptor.app/smtp-config.php
 
 **Check file paths:**
 ```bash
-ls -la /var/www/encryptor.app/httpdocs/js/lucide.js
-ls -la /var/www/encryptor.app/httpdocs/crypto.js
+ls -la /var/www/mysite/httpdocs/js/lucide.js
+ls -la /var/www/mysite/httpdocs/crypto.js
 ```
 
 ---
@@ -574,15 +574,15 @@ sudo certbot renew --dry-run
 
 ```bash
 # Web files
-find /var/www/encryptor.app/httpdocs -type f -exec chmod 644 {} \;
-find /var/www/encryptor.app/httpdocs -type d -exec chmod 755 {} \;
+find /var/www/mysite/httpdocs -type f -exec chmod 644 {} \;
+find /var/www/mysite/httpdocs -type d -exec chmod 755 {} \;
 
 # SMTP config (CRITICAL!)
 chmod 600 /var/www/vhosts/encryptor.app/smtp-config.php
 
 # Logs
-chmod 755 /var/www/encryptor.app/logs
-chmod 644 /var/www/encryptor.app/logs/*.log
+chmod 755 /var/www/mysite/logs
+chmod 644 /var/www/mysite/logs/*.log
 ```
 
 ### Firewall
@@ -625,7 +625,7 @@ bantime = 3600
 ### Update Dependencies
 
 ```bash
-cd /var/www/encryptor.app/httpdocs
+cd /var/www/mysite/httpdocs
 composer update
 sudo systemctl reload php8.3-fpm
 ```
@@ -633,7 +633,7 @@ sudo systemctl reload php8.3-fpm
 ### Update Application
 
 ```bash
-cd /var/www/encryptor.app/httpdocs
+cd /var/www/mysite/httpdocs
 git pull origin main
 composer install --no-dev
 sudo systemctl reload nginx
@@ -643,17 +643,17 @@ sudo systemctl reload nginx
 
 ```bash
 # Find logs older than 30 days
-find /var/www/encryptor.app/logs -name "*.log" -mtime +30
+find /var/www/mysite/logs -name "*.log" -mtime +30
 
 # Delete (be careful!)
-find /var/www/encryptor.app/logs -name "*.log" -mtime +30 -delete
+find /var/www/mysite/logs -name "*.log" -mtime +30 -delete
 ```
 
 ### Clean Rate-Limit Files
 
 ```bash
 # Automatic cleanup script
-bash /var/www/encryptor.app/httpdocs/security/cleanup-ratelimit.sh
+bash /var/www/mysite/httpdocs/security/cleanup-ratelimit.sh
 ```
 
 **Add to cron (daily cleanup):**
@@ -663,7 +663,7 @@ crontab -e
 
 Add:
 ```
-0 2 * * * /usr/bin/bash /var/www/encryptor.app/httpdocs/security/cleanup-ratelimit.sh >/dev/null 2>&1
+0 2 * * * /usr/bin/bash /var/www/mysite/httpdocs/security/cleanup-ratelimit.sh >/dev/null 2>&1
 ```
 
 ### Backup
@@ -682,10 +682,10 @@ mkdir -p $BACKUP_DIR
 
 # Backup files
 tar -czf $BACKUP_DIR/encryptor_$DATE.tar.gz \
-  /var/www/encryptor.app/httpdocs \
+  /var/www/mysite/httpdocs \
   /var/www/vhosts/encryptor.app/smtp-config.php \
-  --exclude='/var/www/encryptor.app/httpdocs/vendor' \
-  --exclude='/var/www/encryptor.app/httpdocs/logs'
+  --exclude='/var/www/mysite/httpdocs/vendor' \
+  --exclude='/var/www/mysite/httpdocs/logs'
 
 # Keep only last 7 backups
 ls -t $BACKUP_DIR/*.tar.gz | tail -n +8 | xargs rm -f
