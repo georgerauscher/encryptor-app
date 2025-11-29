@@ -175,7 +175,7 @@
                         </div>
                         <div class="info-content">
                             <p>
-                                We offer our encryption service <strong>free of charge, forever</strong>, 
+                                We offer our encryption service <strong>free of charge</strong>, 
                                 because we believe in everyone's right to privacy.
                             </p>
                             <p style="margin-top: 1rem;">

@@ -615,7 +615,7 @@ try {
         
         <div class="footer">
             <p>This message was sent via a contact form</p>
-            <span class="badge">Verified & Secured</span>
+            <span class="badge">Encrypted Message</span>
         </div>
     </div>
 </body>

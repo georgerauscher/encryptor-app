@@ -57,7 +57,7 @@ We take security seriously at encryptor.app. If you discover a security vulnerab
 - UI spoofing
 - Browser compatibility issues
 
-### What We Promise
+### Our Commitment
 
 1. **Acknowledgment** in SECURITY.md (with your permission)
 2. **CVE** assignment for critical/high vulnerabilities
