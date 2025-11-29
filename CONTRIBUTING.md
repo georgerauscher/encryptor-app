@@ -16,8 +16,7 @@ Thank you for your interest in contributing! This project is built by [George A.
 
 ### Suggesting Features
 
-1. **Check the roadmap** in `TODO.md` first
-2. **Open an issue** with clear description
+1. **Open an issue** with clear description
 3. **Explain the use case** and why it's valuable
 
 ### Pull Requests
@@ -66,7 +65,6 @@ curl -X POST http://localhost/send-contact.php \
 5. **Update** documentation:
    - `CHANGELOG.md` - Add your changes under "Unreleased"
    - `README.md` - Update if user-facing changes
-   - `TODO.md` - Mark completed features
 6. **Push** to your fork: `git push origin feature/amazing-feature`
 7. **Open** a Pull Request
 

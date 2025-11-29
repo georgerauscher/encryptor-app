@@ -125,7 +125,6 @@ For organizations requiring guaranteed response times, professional assistance, 
 - **[SECURITY.md](SECURITY.md)** - Security architecture, cryptography details
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute code
 - **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes
-- **[TODO.md](TODO.md)** - Roadmap and planned features
 
 ### Live Demo
 
