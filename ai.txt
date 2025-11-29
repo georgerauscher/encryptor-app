@@ -1,0 +1,48 @@
+# AI Training Opt-Out
+
+This website and all its content, code, design, and text are protected by copyright.
+
+## Copyright Notice
+© 2025 George A. Rauscher / intelligent piXel GmbH
+All rights reserved.
+
+## AI Training Policy
+The owner of this website EXPLICITLY OPTS OUT of any use of this website's content for:
+- AI training datasets
+- Machine learning model training
+- Large Language Model (LLM) training
+- Neural network training
+- Any form of automated content extraction for AI purposes
+
+## Legal Basis
+This opt-out is based on:
+- German Copyright Law (Urheberrechtsgesetz - UrhG)
+- EU Copyright Directive (DSM Directive)
+- GDPR (where personal data is involved)
+
+## Enforcement
+Unauthorized use of this website's content for AI training purposes will be considered a violation of copyright law and may result in legal action.
+
+## Robots.txt Directive
+This opt-out is also enforced via robots.txt meta tags:
+```
+<meta name="robots" content="noai, noimageai">
+```
+
+## License Exception
+The source code of this project is released under the MIT License on GitHub.
+This license applies ONLY to the code itself, not to:
+- Website content and text
+- Design and layout
+- Documentation (except technical documentation in the repository)
+- Images and graphics
+
+## Contact
+For questions regarding AI training and content usage:
+George A. Rauscher
+Email: george@rauscher.xyz
+
+---
+
+Last Updated: 2025-11-02
+This file follows the emerging ai.txt standard for AI training opt-out.

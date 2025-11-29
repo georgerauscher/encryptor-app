@@ -1,0 +1,69 @@
+# System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+error_log
+logs/
+
+# Backup Files
+*.bak
+*.backup
+backup/
+*.tar.gz
+*.tar.zst
+*.zip
+
+# PHP Session Files
+sessions/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+
+# Environment Files
+.env
+.env.local
+
+# Security (Rate Limiting - Runtime Data)
+security/rate-limit-*.json
+
+# Composer Binary (use composer install instead)
+composer.phar
+
+# PHPMailer Vendor (use composer install)
+vendor/
+
+# Reports (internal development)
+Reports/
+
+# Session files (development notes)
+SESSION-*.md
+
+# Internal Documentation (not for public)
+ENDABNAHME.md
+SYSTEM-ACCEPTANCE-REPORT-*.md
+TEST-REPORT*.md
+MARKETING-COPY.md
+
+# Backup Files
+*.txt.backup
+*.js.backup
+
+# Duplicate Text Files
+imprint.txt
+privacy.txt
+
+.well-known/
+.cursorrules/

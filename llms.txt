@@ -1,0 +1,130 @@
+# encryptor.app - LLM Context File
+
+## Project Overview
+encryptor.app is a client-side encryption tool built by forensic expert George A. Rauscher.
+Zero-knowledge architecture. AES-256-GCM encryption. PBKDF2-SHA-256 key derivation.
+Everything happens in your browser. Nothing touches our servers.
+
+## Technology Stack
+- Pure HTML5/CSS3/JavaScript (no frameworks, no dependencies)
+- Web Crypto API for encryption
+- Lucide Icons (self-hosted)
+- PHP 8.3 for contact form only
+- Nginx 1.24.0
+- Postfix SMTP (local)
+
+## Core Features
+1. Text Encryption/Decryption (AES-256-GCM)
+2. File Encryption/Decryption (up to 2GB, chunked processing)
+3. PBKDF2-SHA-256 (100,000 iterations for text, 600,000 for files)
+4. Zero-knowledge: Everything client-side
+5. No registration, no tracking, no logging
+6. Works offline
+7. Mobile-optimized
+
+## Security Architecture
+- Client-side only processing
+- No data sent to server
+- No cookies, no analytics, no third-party scripts
+- Anti-spam contact form with multi-layer protection
+- 763+ blocked email domains
+- Rate limiting (3 emails per 10 minutes per IP)
+- Honeypot, pattern detection, language detection
+
+## File Structure
+- `/encrypt.html` - Text encryption page
+- `/decrypt.html` - Text decryption page
+- `/encrypt-file.html` - File encryption page
+- `/decrypt-file.html` - File decryption page
+- `/crypto.js` - Text encryption/decryption logic
+- `/crypto-file.js` - File encryption/decryption logic (64MB chunks)
+- `/send-contact.php` - Contact form backend
+- `/style.css` - Main stylesheet (handcoded, no frameworks)
+
+## Anti-Spam System
+The contact form uses multiple layers of protection:
+1. Domain blocking (gmail.com and 763+ disposable email providers)
+2. Pattern detection (random strings in names/emails)
+3. Honeypot field
+4. Rate limiting (IP-based)
+5. Language detection
+6. Spam keyword filtering
+7. Live frontend validation (instant feedback)
+
+Blocked patterns:
+- Email: abc123@domain.com (letters + numbers)
+- Name: LeePreli, xhsjdhsjdh (random strings)
+- Name: 8+ consonants in a row
+
+## Code Style
+- Handcoded look (no AI-generated patterns)
+- Nerdy but human comments
+- No emojis in code or documentation
+- Clean, readable, minimal
+- No hardcoding (config from files or DB where applicable)
+
+## License
+MIT License - Open source, free forever, modify as you wish
+ISC License for Lucide Icons (self-hosted)
+
+## Author
+George A. Rauscher
+Forensic Expert & Privacy Advocate
+25+ years experience in digital forensics
+https://rauscher.xyz
+https://orcid.org/0009-0008-6791-4858
+
+## Mission
+Privacy is not a privilege for the paranoid. Privacy is infrastructure for freedom.
+This tool was built for whistleblowers, journalists, activists, lawyers, doctors,
+and every human being who refuses to accept mass surveillance as the new normal.
+
+## Encryption Details
+### Text Encryption
+- Algorithm: AES-256-GCM (authenticated encryption)
+- Key Derivation: PBKDF2-SHA-256, 100,000 iterations
+- Salt: 16 bytes (random)
+- IV: 12 bytes (random)
+- Output: Base64-encoded (salt + IV + ciphertext + auth tag)
+
+### File Encryption
+- Algorithm: AES-256-GCM
+- Key Derivation: PBKDF2-SHA-256, 600,000 iterations
+- Salt: 16 bytes (random)
+- IV: 12 bytes (random, regenerated per chunk)
+- Chunk Size: 64MB (for memory efficiency)
+- Max File Size: 2GB
+- Output: Binary format with metadata header
+
+## Browser Support
+- Chrome/Edge: ✅ Full support
+- Firefox: ✅ Full support
+- Safari: ✅ Full support (iOS 11+)
+- Mobile: ✅ Optimized for touch (44px buttons)
+
+## GDPR Compliance
+- No cookies
+- No third-party scripts (Lucide icons self-hosted)
+- No tracking or analytics
+- Contact form: IP address stored for spam protection
+- Privacy policy: Full disclosure, supervisory authority, user rights
+
+## Version History
+- v2.2.0 (2025-11-02): Privacy & GDPR compliance, local Lucide icons
+- v2.1.0 (2025-10-31): File encryption/decryption (2GB), anti-spam improvements
+- v2.0.0 (2025-10-28): Complete rewrite, modern design, mobile-optimized
+
+## Deployment
+Live: https://encryptor.app
+GitHub: https://github.com/georgerauscher/encryptor-app
+
+## Contact
+For integration help, questions, or support:
+- Email: george@rauscher.xyz (via contact form on website)
+- ORCID: 0009-0008-6791-4858
+
+---
+
+Last Updated: 2025-11-02
+This file is for LLM context and documentation purposes.
+

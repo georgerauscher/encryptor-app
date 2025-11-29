@@ -1,0 +1,1215 @@
+<!--
+  encryptor.app - HOME
+  Version 2.2.0 | AES-256-GCM | Zero-Knowledge
+  
+  Built by: George A. Rauscher
+  Company: intelligent piXel GmbH, Starnberg, Germany
+  GitHub: https://github.com/georgerauscher/encryptor-app
+  License: MIT
+-->
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <!-- Security first: UTF-8, viewport for mobile, no auto-translation -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- iOS: Make it feel like a native app -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="encryptor">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- SEO & Branding -->
+    <title>encryptor.app - Military-Grade Encryption | AES-256-GCM | Zero-Knowledge | Privacy is Freedom</title>
+    <meta name="description" content="Client-side AES-256-GCM encryption for whistleblowers, journalists, and activists. Zero knowledge. Zero compromise. Quantum-resistant. Free forever. Military-grade security that protects freedom.">
+    <meta name="keywords" content="text encryption, AES-256, military-grade encryption, zero-knowledge encryption, client-side encryption, whistleblower protection, journalist security, privacy tools, secure messaging, quantum-resistant encryption, PBKDF2, Web Crypto API, digital privacy, surveillance resistance, forensic security, OPSEC, operational security, encrypted text, secure communication, privacy advocate, freedom tools, human rights, data protection, end-to-end encryption">
+    <meta name="author" content="Security Professionals">
+    <meta name="creator" content="Security Professionals">
+    <meta name="publisher" content="intelligent piXel GmbH">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/">
+    
+    
+    <!-- AI Training Opt-Out: My code, my rules -->
+    <meta name="robots" content="noai, noimageai">
+    
+    <!-- Open Graph for Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://encryptor.app/">
+    <meta property="og:site_name" content="encryptor.app">
+    <meta property="og:title" content="encryptor.app - Military-Grade Text Encryption for Freedom">
+    <meta property="og:description" content="Zero-knowledge AES-256-GCM encryption. Built by forensic expert George A. Rauscher. Protect whistleblowers, journalists, activists. Quantum-resistant. Free forever.">
+    <meta property="og:image" content="https://encryptor.app/og_image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="encryptor.app - Privacy is Freedom">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@georgearauscher">
+    <meta name="twitter:creator" content="@georgearauscher">
+    <meta name="twitter:title" content="encryptor.app - Military-Grade Text Encryption">
+    <meta name="twitter:description" content="Zero-knowledge AES-256-GCM encryption. Built by forensic expert. Protects whistleblowers, journalists, activists. Quantum-resistant. Free forever.">
+    <meta name="twitter:image" content="https://encryptor.app/og_image.jpg">
+    <meta name="twitter:image:alt" content="encryptor.app - Your encrypted message will outlive the sun">
+    
+    <!-- Structured Data for Search Engines (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "encryptor.app",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Web Browser, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Security Professionals"
+      },
+      "description": "Client-side AES-256-GCM text encryption with zero-knowledge architecture. Quantum-resistant. Built for whistleblowers, journalists, and activists.",
+      "featureList": [
+        "AES-256-GCM encryption",
+        "PBKDF2-SHA-256 key derivation (100k iterations)",
+        "Zero-knowledge architecture",
+        "Client-side only (no server processing)",
+        "Quantum-resistant",
+        "No registration required",
+        "No tracking or logging",
+        "Works offline",
+        "Mobile-optimized"
+      ],
+      "screenshot": "https://encryptor.app/og_image.jpg",
+      "softwareVersion": "2.2.0",
+      "releaseNotes": "Version 2.2.0: Pure client-side encryption (zero-knowledge), AES-256-GCM, PBKDF2, file encryption up to 2GB, local Lucide icons (no CDN), MIT License",
+      "datePublished": "2023-01-01",
+      "dateModified": "2025-11-02",
+      "publisher": {
+        "@type": "Organization",
+        "name": "YOUR COMPANY NAME",
+        "url": "https://yourwebsite.com"
+      },
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./favicon.ico">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="./style.css?v=20251114090000">
+    
+    <!-- Mobile button fix: 44px touch targets for thumbs, not tiny desktop pixels -->
+    <style>
+        @media (max-width: 768px) {
+            .btn, 
+            .btn-primary, 
+            .btn-secondary, 
+            .cta-buttons .btn, 
+            .cta-buttons .btn-primary, 
+            .cta-buttons .btn-secondary {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+                min-height: 44px !important;
+                max-height: 44px !important;
+                height: 44px !important;
+                line-height: 1.2 !important;
+            }
+        }
+        
+        /* Subtle link hover effect for forensic work link */
+        a[href="https://yourwebsite.com"]:hover {
+            color: var(--blue-400) !important;
+        }
+    </style>
+</head>
+    <body>
+        <div class="grain-overlay"></div>
+        <nav class="nav">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <i data-lucide="shield-check" class="nav-icon"></i>
+                    <span class="nav-brand">encryptor.app</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#security" class="nav-link">Security</a>
+                    <a href="#mission" class="nav-link">Mission</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+    <main class="container">
+        <!-- HERO SECTION -->
+        <div class="hero" id="home">
+            <div class="hero-badge">
+                <i data-lucide="lock-keyhole" class="badge-icon"></i>
+                <span>AES-256-GCM · File Encryption · Version 2.2</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Privacy Isn't Paranoia.<br>
+                <span class="hero-gradient">It's Survival.</span>
+            </h1>
+            
+            <p class="hero-description">
+                Military-grade encryption built by a forensic expert with 25+ years experience.
+                For whistleblowers, journalists, activists, and anyone whose freedom depends on privacy.
+                Client-side only. Zero knowledge. Zero compromise.
+            </p>
+
+            <!-- Text Encryption Buttons -->
+            <div class="cta-buttons">
+                <a href="./encrypt.html" class="btn btn-primary">
+                    <i data-lucide="lock" class="btn-icon"></i>
+                    <span>Encrypt Message</span>
+                    <i data-lucide="arrow-right" class="btn-arrow"></i>
+                </a>
+                
+                <a href="./decrypt.html" class="btn btn-secondary">
+                    <i data-lucide="unlock" class="btn-icon"></i>
+                    <span>Decrypt Message</span>
+                    <i data-lucide="arrow-right" class="btn-arrow"></i>
+                </a>
+            </div>
+
+            <!-- File Encryption Buttons -->
+            <div class="cta-buttons" style="margin-top: 1.5rem;">
+                <a href="./encrypt-file.html" class="btn btn-primary">
+                    <i data-lucide="file-lock" class="btn-icon"></i>
+                    <span>Encrypt File</span>
+                    <i data-lucide="arrow-right" class="btn-arrow"></i>
+                </a>
+                
+                <a href="./decrypt-file.html" class="btn btn-secondary">
+                    <i data-lucide="file-key" class="btn-icon"></i>
+                    <span>Decrypt File</span>
+                    <i data-lucide="arrow-right" class="btn-arrow"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- WHY THIS EXISTS -->
+        <div class="info-section" id="mission">
+            <div class="info-card">
+                <div class="info-header">
+                    <i data-lucide="heart" class="info-icon"></i>
+                    <h2>Why encryptor.app Exists</h2>
+                </div>
+                <div class="info-content">
+                    <p class="info-highlight">
+                        Privacy is not about hiding. It's about freedom. And in many parts of the world, 
+                        freedom means survival.
+                    </p>
+                    
+                    <p>
+                        After 25 years as a forensic expert, I've seen things you don't forget. I've stood in basements where hard drives were seized. I've read protocols that destroyed lives. I've worked with investigators across four continents, and I've come to understand this: The line between security and surveillance is as thin as a password on an unencrypted PDF.
+                    </p>
+                    
+                    <p>
+                        I've seen cases where encryption saved lives. Where a single encrypted message protected a whistleblower who exposed billion-dollar fraud. Where an encrypted file made the difference between press freedom and prison. Where an investigative journalist in Tehran could protect their sources because no one could read the message. Not the intelligence service. Not the state. No one.
+                    </p>
+                    
+                    <p>
+                        But I've also seen the other side, the dark one. I've read files where a single unencrypted text message destroyed a life. An unprotected email became evidence in a show trial. A document without encryption cost someone not just their career, but their family. Their freedom. Sometimes their life. This isn't paranoia, this is reality.
+                    </p>
+                    
+                    <p>
+                        In October 2025, Europe came dangerously close to introducing what they called chat control. A law that would force messenger services to automatically scan your messages, photos, and videos before you've even seen them yourself. Even end-to-end encrypted chats would have been affected. Your most intimate moments. Your thoughts. Your secrets. All scanned. By AI. By algorithms. By people you'll never know.
+                    </p>
+                    
+                    <p>
+                        The vote failed for now. Germany stood against it this time. But don't be naive about this: They will try again. They'll invent new terminology. Propose new compromises. They'll say it serves child protection, even though Germany's Federal Criminal Police Office reported in 2024 that every second chat flagged through voluntary chat control was legally irrelevant. They'll say only the bad guys need to worry. But I was there. I've watched how "only the bad guys" became everyone. How temporary became permanent. How security became control.
+                    </p>
+                    
+                    <p>
+                        Let me be crystal clear about something: I've dedicated my life to solving crimes. I've secured evidence that put perpetrators behind bars. I've worked alongside police, intelligence services, and judicial authorities. I understand the value of investigations. But I also understand the difference between targeted investigation and blanket surveillance.
+                    </p>
+                    
+                    <p>
+                        Encryption doesn't protect criminals. Criminals have long found their ways around everything. Encryption protects the whistleblower exposing a pharmaceutical scandal who fears multimillion-dollar lawsuits. It protects the journalist in Moscow reporting on war crimes whose sources could disappear. It protects the human rights activist in Iran coordinating protests who knows a single intercepted message could cost her life. It protects the lawyer conducting confidential client conversations whose confidentiality is the foundation of the rule of law. It protects the doctor who must safeguard sensitive patient data. It protects you. Yes, you. With your diary. Your passwords. Your photos. Your life.
+                    </p>
+                    
+                    <p>
+                        Privacy is not a privilege for the paranoid. Privacy is infrastructure for freedom. And freedom is always just one generation away from extinction.
+                    </p>
+                    
+                    <p>
+                        We all know this. Intelligence services are listening. The darknet is no longer secure. Suspicionless chat controls exist worldwide only in China and are used there to hunt political opponents. Zero-day exploits cost millions. AI-powered systems analyze petabytes of data. Tech giants collaborate with governments in deals that would make Orwell weep. The tools available to dissidents, journalists, and ordinary people must not just keep pace, they must be unbreakable.
+                    </p>
+                    
+                    <p>
+                        And that's why I built Encryptor. Open source. Transparent. Free. For you.
+                    </p>
+                    
+                    <p>
+                        By releasing it under the MIT License, I've made Encryptor more than just a program. I've made it a movement. Every lawyer can now communicate securely with their clients without fear that confidentiality becomes an empty phrase. Every medical practice can protect patient data as the law requires and ethics demands. Every business can preserve trade secrets. Every person can finally breathe again.
+                    </p>
+                    
+                    <p>
+                        But it goes further than that. You can embed Encryptor into your own website. You can install it on your server. You can run it locally on your PC. You decide where your data lives. You decide who has access. You decide what's secure and what's not. And if you need help with integration, if you don't know how to build it into your infrastructure, then ask me. I'll help you. For free. Because this isn't business, this is a promise.
+                    </p>
+                    
+                    <p>
+                        My dream is simple and radical at the same time: Encryptor everywhere. On your servers. On your computers. In your practices. In your law offices. In your newsrooms. In your living rooms. Imagine this: Thousands of installations. In Berlin and Rio. In Hong Kong and Tehran. In small villages and megacities. A global network of people who refuse to be surveilled. Who say: No. My thoughts belong to me. My words belong to me. My life belongs to me.
+                    </p>
+                    
+                    <p>
+                        This is the beginning. The beginning of something bigger. The beginning of freedom as we'd almost forgotten it. Not the freedom graciously granted to us, but the freedom we take for ourselves. The freedom we build. Bit by bit. Installation by installation. Person by person.
+                    </p>
+                    
+                    <p>
+                        That's why I've released Encryptor as open source on GitHub. So everyone can see what the code does. So everyone can improve it. So everyone can adapt it to their needs. So no one has to trust me, only the code. Transparency isn't optional. Transparency is the foundation of trust in a world that has robbed us of trust.
+                    </p>
+                    
+                    <p>
+                        Encrypt your password PDFs. Encrypt your diaries. Encrypt your patient records. Encrypt your client correspondence. Encrypt your research data. Encrypt your life. Because we live in a time when everything is scanned. When every photo, every message, every file is considered suspicious until proven otherwise. When our freedom and privacy are no longer taken for granted but must be fought for.
+                    </p>
+                    
+                    <p>
+                        That's why I'm giving you Encryptor. Not because I want to sell something. Not because I want to be famous. Because I've spent 25 years watching what happens when people don't have tools to protect themselves. Because I'm tired of reading files where a life could have been saved if just one single file had been encrypted. Because I won't stand by anymore watching freedom die while we all look away.
+                    </p>
+                    
+                    <p>
+                        Encryptor is my answer. To chat control. To surveillance. To fear. To resignation. Get it. Use it. Share it. Install it on every device you have. Embed it in your website. Install it on your server. Make it part of your digital DNA. And if one day the door opens and they ask for your data, smile and say: Encrypted. Unbreakable. Mine.
+                    </p>
+                    
+                    <p>
+                        This is not the end, this is the beginning. The beginning of a world where privacy is a right again, not a privilege. The beginning of a world where you don't have to explain why you have something to hide, but where they have to explain why they want to see it. The beginning of a world where encryption is as natural as an envelope. As normal as a closed door. As fundamental as the right to breathe.
+                    </p>
+                    
+                    <p class="info-highlight">
+                        <strong>Freedom dies in secrecy. Encryption brings it to light.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Encryption Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <div class="info-header">
+                    <i data-lucide="file-lock-2" class="info-icon"></i>
+                    <h2>NEW: Encrypt Files Up To 2GB</h2>
+                </div>
+                <div class="info-content">
+                    <p class="info-highlight">
+                        Version 2.2 introduces client-side file encryption. Your confidential documents, contracts, 
+                        medical records, or source materials are encrypted entirely on your device. They never touch 
+                        our servers.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                        <div style="padding: 1.5rem; background: var(--slate-800); border: 1px solid var(--slate-700); border-radius: var(--radius-md);">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="upload-cloud" style="width: 28px; height: 28px; color: var(--blue-400);"></i>
+                                <h3 style="font-size: 1.125rem; color: var(--slate-200); margin: 0;">Any File Type</h3>
+                            </div>
+                            <p style="color: var(--slate-400); line-height: 1.6; margin: 0;">
+                                PDFs, images, videos, documents, archives. Drag and drop or click to browse. 
+                                Maximum file size: 2GB.
+                            </p>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: var(--slate-800); border: 1px solid var(--slate-700); border-radius: var(--radius-md);">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="cpu" style="width: 28px; height: 28px; color: var(--blue-400);"></i>
+                                <h3 style="font-size: 1.125rem; color: var(--slate-200); margin: 0;">Chunked Processing</h3>
+                            </div>
+                            <p style="color: var(--slate-400); line-height: 1.6; margin: 0;">
+                                Files are encrypted in 64MB chunks to prevent memory overload. Progress bar shows 
+                                real-time status.
+                            </p>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: var(--slate-800); border: 1px solid var(--slate-700); border-radius: var(--radius-md);">
+                            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                                <i data-lucide="shield-check" style="width: 28px; height: 28px; color: var(--blue-400);"></i>
+                                <h3 style="font-size: 1.125rem; color: var(--slate-200); margin: 0;">Same Security</h3>
+                            </div>
+                            <p style="color: var(--slate-400); line-height: 1.6; margin: 0;">
+                                AES-256-GCM encryption with PBKDF2 key derivation. Same military-grade security 
+                                as message encryption.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: var(--radius-md);">
+                        <h4 style="color: var(--slate-100); margin-bottom: 1rem; font-size: 1.125rem;">How File Encryption Works</h4>
+                        
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="display: flex; gap: 1rem; align-items: start;">
+                                <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--slate-800); border: 2px solid var(--blue-500); display: flex; align-items: center; justify-content: center; color: var(--blue-400); font-weight: 700;">1</div>
+                                <div>
+                                    <strong style="color: var(--slate-200);">Select your file</strong>
+                                    <p style="color: var(--slate-400); margin: 0.25rem 0 0 0;">Any file type, up to 2GB. Drag and drop or click to browse.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem; align-items: start;">
+                                <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--slate-800); border: 2px solid var(--blue-500); display: flex; align-items: center; justify-content: center; color: var(--blue-400); font-weight: 700;">2</div>
+                                <div>
+                                    <strong style="color: var(--slate-200);">Browser encrypts in chunks</strong>
+                                    <p style="color: var(--slate-400); margin: 0.25rem 0 0 0;">Your file is read in 64MB chunks. Each chunk is encrypted with AES-256-GCM and a unique IV.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem; align-items: start;">
+                                <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--slate-800); border: 2px solid var(--blue-500); display: flex; align-items: center; justify-content: center; color: var(--blue-400); font-weight: 700;">3</div>
+                                <div>
+                                    <strong style="color: var(--slate-200);">Download encrypted file</strong>
+                                    <p style="color: var(--slate-400); margin: 0.25rem 0 0 0;">Original filename and file type preserved in encrypted metadata. Share via email, cloud, or USB.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem; align-items: start;">
+                                <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--slate-800); border: 2px solid var(--blue-500); display: flex; align-items: center; justify-content: center; color: var(--blue-400); font-weight: 700;">4</div>
+                                <div>
+                                    <strong style="color: var(--slate-200);">Decrypt when needed</strong>
+                                    <p style="color: var(--slate-400); margin: 0.25rem 0 0 0;">Upload the .encrypted file, enter your password, and get your original file back. Same zero-knowledge process.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding: 1.25rem; background: var(--slate-800); border-left: 4px solid var(--blue-500); border-radius: var(--radius-md);">
+                        <p style="color: var(--slate-300); line-height: 1.7; margin: 0;">
+                            <strong style="color: var(--slate-200);">Performance:</strong> A 1GB file typically encrypts in 15-30 seconds on modern desktop (M2/M3 MacBook, high-end PCs). 
+                            Mobile devices recommended for files under 500MB due to memory constraints. The entire process happens in 
+                            your browser using the Web Crypto API - no server upload, no cloud processing, no third-party access.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+                        <a href="./encrypt-file.html" class="btn btn-primary">
+                            <i data-lucide="file-lock" class="btn-icon"></i>
+                            <span>Try File Encryption</span>
+                            <i data-lucide="arrow-right" class="btn-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VERSION 2.0 STORY -->
+        <div class="info-section">
+            <div class="info-card">
+                <div class="info-header">
+                    <i data-lucide="zap" class="info-icon"></i>
+                    <h2>Version 2.2: Why We Rebuilt Everything</h2>
+                </div>
+                <div class="info-content">
+                    <p>
+                        encryptor.app launched in 2023 with server-side PHP encryption. It was good. 
+                        AES-256-CBC with HMAC authentication. Better than 99% of tools available.
+                    </p>
+                    
+                    <p>
+                        <strong>But good isn't good enough when lives are at stake.</strong>
+                    </p>
+                    
+                    <p>
+                        Version 1.x had a fundamental limitation: your plaintext passed through the server 
+                        before encryption. We never logged it. We never stored it. But it existed on our 
+                        infrastructure for milliseconds.
+                    </p>
+                    
+                    <p>
+                        That millisecond is a vulnerability. If a state actor compromised our server, or 
+                        compelled us to log traffic, or conducted memory forensics, your plaintext could 
+                        theoretically be captured.
+                    </p>
+                    
+                    <p class="info-highlight">
+                        <strong>Version 2.2 eliminates that possibility completely.</strong>
+                    </p>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--slate-800); border-radius: var(--radius-md); border-left: 4px solid var(--blue-500);">
+                        <h4 style="margin-bottom: 1rem; color: var(--slate-100);">Technical Changes</h4>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                            <div>
+                                <strong style="color: var(--red-500);">Version 1.x (PHP Server-Side)</strong>
+                                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--slate-400);">
+                                    <li>Plaintext sent to server</li>
+                                    <li>Server performs encryption</li>
+                                    <li>AES-256-CBC + HMAC</li>
+                                    <li>Password used directly as key</li>
+                                    <li>Server sees your data</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <strong style="color: var(--green-500);">Version 2.2 (Pure Client-Side)</strong>
+                                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--slate-400);">
+                                    <li>Plaintext never leaves browser</li>
+                                    <li>JavaScript Web Crypto API</li>
+                                    <li>AES-256-GCM (authenticated)</li>
+                                    <li>PBKDF2 key derivation (100k iterations)</li>
+                                    <li>Server sees nothing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 1.5rem;">
+                        <strong>What this means in practice:</strong>
+                    </p>
+                    
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Even if we wanted to read your messages, we cannot. The cryptographic operations happen in your browser using native Web Crypto APIs. We have zero access.</li>
+                        <li>If a government agency compels us to log data, there is nothing to log. Your plaintext and password exist only in your browser's memory.</li>
+                        <li>If our server is compromised, seized, or destroyed, your encrypted messages remain secure. The encryption happened before any network transmission.</li>
+                        <li>If quantum computers break internet encryption (TLS), your message content is still protected. AES-256 is quantum-resistant.</li>
+                    </ul>
+                    
+                    <p class="info-highlight" style="margin-top: 1.5rem;">
+                        <strong>This is zero-knowledge architecture.</strong> Not marketing. Not theory. Mathematical certainty.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TECHNICAL SECURITY -->
+        <div class="info-section" id="security">
+            <div class="info-card">
+                <div class="info-header">
+                    <i data-lucide="cpu" class="info-icon"></i>
+                    <h2>How It Works: Technical Deep Dive</h2>
+                </div>
+                <div class="info-content">
+                    <h3 style="font-size: 1.25rem; color: var(--slate-100); margin-bottom: 1rem;">Encryption Process</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Password to Key Transformation</h4>
+                            <p>
+                                Your password is not used directly. It passes through PBKDF2 (Password-Based Key Derivation Function 2) 
+                                with SHA-256 and 100,000 iterations. A random 16-byte salt ensures identical passwords produce 
+                                different keys. This process takes ~100 milliseconds deliberately, making brute-force attacks 
+                                computationally expensive.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Encryption (AES-256-GCM)</h4>
+                            <p>
+                                Your message is encrypted using AES (Advanced Encryption Standard) with a 256-bit key in 
+                                Galois/Counter Mode (GCM). GCM provides both confidentiality and authentication. A random 
+                                12-byte initialization vector (IV) ensures that encrypting the same message twice produces 
+                                different ciphertext. The authentication tag prevents any tampering.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Output Format</h4>
+                            <p>
+                                The final output combines: [Salt (16 bytes)] + [IV (12 bytes)] + [Encrypted Data] + [Auth Tag (16 bytes)].
+                                This is Base64-encoded for easy copying and pasting. Anyone with your password can decrypt it.
+                                Anyone without your password faces 2^256 possible combinations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; color: var(--slate-100); margin: 2rem 0 1rem;">Why AES-256?</h3>
+                    
+                    <p>
+                        AES-256 is the same encryption standard used by the NSA for TOP SECRET information. 
+                        It's been extensively analyzed by cryptographers worldwide for over two decades. 
+                        No practical attacks exist.
+                    </p>
+                    
+                    <p>
+                        <strong>The math is simple and terrifying (if you're trying to break it):</strong>
+                    </p>
+                    
+                    <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--slate-900); border-radius: var(--radius-md); font-family: 'Courier New', monospace; font-size: 0.875rem; overflow-x: auto;">
+                        <p style="color: var(--slate-300);">Possible AES-256 keys:</p>
+                        <p style="color: var(--green-500); margin-top: 0.5rem;">2^256 = 115,792,089,237,316,195,423,570,985,008,687,907,853,269,984,665,640,564,039,457,584,007,913,129,639,936</p>
+                        
+                        <p style="color: var(--slate-300); margin-top: 1.5rem;">Fastest supercomputer (2025): ~10^18 keys/second</p>
+                        <p style="color: var(--slate-300); margin-top: 0.5rem;">Time to try all combinations:</p>
+                        <p style="color: var(--red-500); margin-top: 0.5rem;">3.7 × 10^55 years</p>
+                        
+                        <p style="color: var(--slate-300); margin-top: 1.5rem;">Age of the universe: 13.8 billion years (1.38 × 10^10)</p>
+                        <p style="color: var(--slate-300); margin-top: 0.5rem;">You need: <span style="color: var(--amber-500);">10^46 times the age of the universe</span></p>
+                    </div>
+                    
+                    <p>
+                        To put this in perspective: there are approximately 10^80 atoms in the observable universe. 
+                        The number of possible AES-256 keys is larger than the number of atoms in a trillion trillion universes.
+                    </p>
+                    
+                    <p class="info-highlight">
+                        <strong>Your encrypted message will outlive the sun.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUANTUM COMPUTING -->
+        <div class="info-section">
+            <div class="info-card">
+                <div class="info-header">
+                    <i data-lucide="atom" class="info-icon"></i>
+                    <h2>What About Quantum Computers?</h2>
+                </div>
+                <div class="info-content">
+                    <p>
+                        Legitimate concern. Quantum computers break certain types of encryption. Specifically, 
+                        Shor's algorithm can break RSA and ECC (the encryption used for HTTPS and digital signatures) 
+                        in polynomial time.
+                    </p>
+                    
+                    <p>
+                        <strong>AES is different.</strong>
+                    </p>
+                    
+                    <p>
+                        Grover's algorithm, the best known quantum attack against AES, provides only a quadratic speedup. 
+                        This means AES-256 becomes equivalent to AES-128 against a quantum attacker.
+                    </p>
+                    
+                    <p>
+                        AES-128 still has 2^128 possible keys:
+                    </p>
+                    
+                    <div style="margin: 1.5rem 0; padding: 1.5rem; background: var(--slate-900); border-radius: var(--radius-md); font-family: 'Courier New', monospace; font-size: 0.875rem;">
+                        <p style="color: var(--green-500);">2^128 = 340,282,366,920,938,463,463,374,607,431,768,211,456</p>
+                        
+                        <p style="color: var(--slate-300); margin-top: 1.5rem;">Even with a hypothetical quantum computer trying 10^12 keys/second:</p>
+                        <p style="color: var(--amber-500); margin-top: 0.5rem;">Time to crack: ~10 billion years</p>
+                    </div>
+                    
+                    <p>
+                        Current quantum computers have ~1,000 qubits. To break AES-128 with Grover's algorithm, 
+                        you need millions of error-corrected qubits. Current error rates make this impossible.
+                    </p>
+                    
+                    <p>
+                        Most experts estimate we're 30-50 years away from cryptographically relevant quantum computers. 
+                        Even then, AES-256 remains secure. The NSA, NIST, and every major cryptographic authority 
+                        consider AES-256 quantum-resistant.
+                    </p>
+                    
+                    <p class="info-highlight">
+                        <strong>Translation:</strong> Your encrypted messages are safe from any known or theoretical attack, 
+                        including quantum computers that don't exist yet.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES GRID -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="shield" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Military-Grade Security</h3>
+                <p class="feature-text">
+                    AES-256-GCM with PBKDF2 key derivation. The same standards trusted by 
+                    governments and intelligence agencies worldwide.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="eye-off" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Zero Knowledge</h3>
+                <p class="feature-text">
+                    All encryption happens in your browser. We never see your data or passwords. 
+                    Mathematical certainty, not marketing claims.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="wifi-off" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Works Offline</h3>
+                <p class="feature-text">
+                    Once loaded, no internet required. Encrypt and decrypt anywhere, anytime. 
+                    Perfect for high-risk environments.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="user-x" class="icon"></i>
+                </div>
+                <h3 class="feature-title">No Account Required</h3>
+                <p class="feature-text">
+                    No registration, no emails, no tracking. Just open and encrypt. 
+                    Privacy by design, not afterthought.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="smartphone" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Mobile Ready</h3>
+                <p class="feature-text">
+                    Works perfectly on any device. Secure communication on the go, 
+                    whether you're at home or in the field.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="code-2" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Open Standards</h3>
+                <p class="feature-text">
+                    Web Crypto API implementation. No proprietary algorithms. 
+                    Transparent, auditable, trustworthy.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="hard-drive" class="icon"></i>
+                </div>
+                <h3 class="feature-title">File Encryption</h3>
+                <p class="feature-text">
+                    Encrypt files up to 2GB. PDFs, images, videos, documents. 
+                    Chunked processing for any file size.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="gauge" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Real-Time Progress</h3>
+                <p class="feature-text">
+                    Live progress bars show encryption status. 
+                    Time estimates for large files. Never wonder what's happening.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i data-lucide="github" class="icon"></i>
+                </div>
+                <h3 class="feature-title">Open Source</h3>
+                <p class="feature-text">
+                    MIT License. Fork it, audit it, improve it. 
+                    Transparency builds trust. Available on GitHub.
+                </p>
+            </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div class="author-section">
+            <div class="author-card">
+                <div class="author-content">
+                    <h3>Built by Security Experts for People Who Need It</h3>
+                    <p>
+                        This tool was created by professionals with decades of experience in digital forensics, 
+                        intelligence analysis, and cryptography. We've worked on cases involving whistleblower protection, 
+                        journalist security, and evidence preservation in high-stakes environments.
+                    </p>
+                    <p>
+                        We've seen firsthand how encryption protects those who expose corruption, how lack of security 
+                        can lead to imprisonment of truth-tellers, and how a single intercepted message can change lives forever.
+                    </p>
+                    <p>
+                        This is why we built this tool: because privacy is not a luxury. It's a fundamental human right. 
+                        And because the tools that protect this right must be open, transparent, and available to everyone 
+                        who needs them.
+                    </p>
+                    <p class="info-highlight">
+                        <strong>This isn't just software. It's resistance.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div class="info-section" id="contact">
+            <div class="form-container">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h1>Secure Contact</h1>
+                        <p>Questions? Feedback? Security concerns? Reach out.</p>
+                    </div>
+
+                    <div id="contact-alerts"></div>
+
+                    <form id="contactForm" method="POST" action="./send-contact.php">
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                <i data-lucide="user" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                                Your Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input" 
+                                placeholder="Name or pseudonym"
+                                required
+                                maxlength="100"
+                            >
+                            <span class="error-message" id="name-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                <i data-lucide="mail" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                                Your Email
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="your@email.com"
+                                required
+                                maxlength="100"
+                            >
+                            <span class="error-message" id="email-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                <i data-lucide="message-square" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                                Your Message
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                class="form-textarea" 
+                                placeholder="Your message..."
+                                rows="6"
+                                required
+                                maxlength="5000"
+                            ></textarea>
+                            <span class="error-message" id="message-error" role="alert"></span>
+                        </div>
+
+                        <!-- Honeypot field (hidden from humans, visible to bots) -->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- Privacy Consent (GDPR Art. 6 Abs. 1 lit. a) -->
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label style="display: flex; align-items: flex-start; cursor: pointer; font-size: 0.875rem; color: var(--slate-300); line-height: 1.6;">
+                                <input 
+                                    type="checkbox" 
+                                    id="privacy-consent" 
+                                    name="privacy_consent" 
+                                    required
+                                    style="margin-right: 0.75rem; margin-top: 0.25rem; cursor: pointer; width: 18px; height: 18px; accent-color: var(--blue-500);"
+                                >
+                                <span>
+                                    I consent to my data (name, email, message, IP address) being processed to respond to my inquiry. 
+                                    My data will be sent via encrypted email and stored for spam protection (max. 7 days). 
+                                    I can revoke this consent at any time. See <a href="./privacy.php" class="text-link" style="font-size: 0.875rem;">Privacy Policy</a> for details.
+                                </span>
+                            </label>
+                            <span class="error-message" id="privacy-consent-error" role="alert"></span>
+                        </div>
+
+                        <div class="form-actions" style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%;">
+                                <i data-lucide="send" class="btn-icon"></i>
+                                <span>Send Message</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--slate-800); border-radius: var(--radius-md); font-size: 0.875rem; color: var(--slate-400);">
+                        <p style="margin-bottom: 0.5rem;">
+                            <i data-lucide="shield-check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; color: var(--green-500);"></i>
+                            <strong style="color: var(--slate-300);"> Secure Form:</strong> Rate-limited (3 messages per 10 minutes). 
+                            Messages are sent via encrypted SMTP to your@email.com (Proton Mail). 
+                            Your IP address is stored for 7 days for spam protection (see <a href="./privacy.php" class="text-link" style="font-size: 0.875rem;">Privacy Policy</a>).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPORTANT NOTICE -->
+        <div class="info-section">
+            <div class="info-card">
+                <div class="info-header">
+                    <i data-lucide="alert-triangle" class="info-icon"></i>
+                    <h2>Important Notice</h2>
+                </div>
+                <div class="info-content">
+                    <p>
+                        While we use military-grade encryption (AES-256-GCM), no system is 100% secure. 
+                        Use at your own risk.
+                    </p>
+                    
+                    <p>
+                        <strong>We cannot recover lost passwords.</strong> If you forget your password, 
+                        your encrypted data is permanently inaccessible. There are no backdoors. This is by design.
+                    </p>
+                    
+                    <p>
+                        Users must comply with all applicable laws. Encryption regulations vary by jurisdiction. 
+                        It is your responsibility to ensure compliance. This tool is intended for legitimate privacy 
+                        protection, not illegal activities.
+                    </p>
+                    
+                    <p>
+                        <strong>Threat model limitations:</strong> This tool protects message content. It does not 
+                        protect metadata (who you communicate with), endpoint security (if your device is compromised), 
+                        or operational security (if you use weak passwords or insecure channels to share them).
+                    </p>
+                    
+                    <p>
+                        For comprehensive security, combine encryptor.app with: secure operating systems, 
+                        Tor or VPN for anonymity, strong password management, and proper operational security practices.
+                    </p>
+                    
+                    <p>
+                        See our <a href="./privacy.php" class="text-link">Privacy Policy</a> for complete terms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p class="footer-text">
+                    Copyright 2025, <a href="https://rauscher.xyz" style="color: inherit; text-decoration: none;" target="_blank" rel="noopener">George A. Rauscher</a><br>
+                    Version 2.2.0 - Zero-Knowledge Encryption<br>
+                    Built for freedom. Built for privacy. Built for those who need it most.
+                </p>
+            </div>
+            <div class="footer-section">
+                <a href="./imprint.php" class="footer-link">Imprint</a>
+                <span class="footer-separator">|</span>
+                <a href="./privacy.php" class="footer-link">Privacy</a>
+                <span class="footer-separator">|</span>
+                <a href="#licenses" class="footer-link licenses-trigger">Licenses</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons (self-hosted) -->
+    <script src="./js/lucide.js"></script>
+    
+    <!-- Licenses Modal -->
+    <script src="./licenses-modal.js?v=20251129185000"></script>
+    
+    <script>
+        // Initialize Lucide icons IMMEDIATELY (no DOMContentLoaded needed at body end)
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons({ icons: lucide.icons });
+        }
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== Contact Form: INSTANT Live Validation =====
+        
+        // Load blocked domains list
+        let blockedDomains = [];
+        fetch('/security/blocked-domains.txt')
+            .then(response => response.text())
+            .then(text => {
+                blockedDomains = text.split('\n')
+                    .map(line => line.trim().toLowerCase())
+                    .filter(line => line && !line.startsWith('#'));
+            })
+            .catch(err => console.warn('Could not load blocked domains:', err));
+        
+        function checkBlockedDomain(email) {
+            if (!email || !email.includes('@')) return null;
+            
+            const parts = email.toLowerCase().split('@');
+            if (parts.length !== 2) return null;
+            
+            const domain = parts[1];
+            
+            // Check even partial domains (e.g., "gm" would match if typing "gmail.com")
+            for (const blocked of blockedDomains) {
+                if (domain === blocked || (domain.length > 2 && blocked.startsWith(domain))) {
+                    if (blocked.includes('gmail')) {
+                        return 'This email address is not accepted (used for spam). Please use ProtonMail or a business email.';
+                    }
+                    return 'This email address is not accepted (used for spam). Please use a trusted provider.';
+                }
+            }
+            
+            return null;
+        }
+        
+        function validateField(field, instantCheck = false) {
+            const value = field.value.trim();
+            const fieldName = field.name;
+            const errorElement = document.getElementById(`${fieldName}-error`);
+            const submitBtn = document.getElementById('submitBtn');
+            
+            let isValid = true;
+            let errorMessage = '';
+            
+            // Name validation - ALWAYS check random patterns
+            if (fieldName === 'name') {
+                if (value.length === 0 && instantCheck) {
+                    // Allow empty during typing
+                    isValid = true;
+                } else if (value.length > 0 && value.length < 2) {
+                    isValid = false;
+                    errorMessage = 'Name must be at least 2 characters.';
+                } else if (value.length > 100) {
+                    isValid = false;
+                    errorMessage = 'Name is too long (max. 100 characters).';
+                } else if (value.length > 0 && (/^[a-z]{3,}\d{2,}$/i.test(value) || /[bcdfghjklmnpqrstvwxyz]{8,}/i.test(value))) {
+                    // Random pattern detection
+                    isValid = false;
+                    errorMessage = 'Please use a real name, not random characters.';
+                }
+            }
+            
+            // Email validation - INSTANT domain check
+            if (fieldName === 'email') {
+                // ALWAYS check blocked domains, even for partial input
+                const blockedError = checkBlockedDomain(value);
+                if (blockedError) {
+                    isValid = false;
+                    errorMessage = blockedError;
+                } else if (value.length === 0 && instantCheck) {
+                    // Allow empty during typing
+                    isValid = true;
+                } else if (value.length > 0) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value) && !instantCheck) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address.';
+                    } else if (emailRegex.test(value)) {
+                        const emailParts = value.split('@');
+                        const localPart = emailParts[0];
+                        
+                        // Check for random email patterns
+                        if (/^[a-z]{3,}\d{2,}$/i.test(localPart) || /^[a-z]{2,}\d+[a-z]{2,}\d+$/i.test(localPart)) {
+                            isValid = false;
+                            errorMessage = 'This email address looks suspicious. Please use a real email address.';
+                        }
+                    }
+                }
+            }
+            
+            // Message validation - check even short text
+            if (fieldName === 'message') {
+                if (value.length === 0 && instantCheck) {
+                    // Allow empty during typing
+                    isValid = true;
+                } else if (value.length > 0 && value.length < 10) {
+                    isValid = false;
+                    errorMessage = 'Message must be at least 10 characters.';
+                } else if (value.length > 5000) {
+                    isValid = false;
+                    errorMessage = 'Message is too long (max. 5000 characters).';
+                }
+            }
+            
+            // Update error message display
+            if (errorElement) {
+                if (isValid) {
+                    errorElement.textContent = '';
+                    errorElement.classList.remove('active');
+                    field.classList.remove('error');
+                } else {
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.add('active');
+                    field.classList.add('error');
+                }
+            }
+            
+            // Disable submit button if ANY field has error
+            if (submitBtn) {
+                const hasErrors = document.querySelector('.error-message.active') !== null;
+                submitBtn.disabled = hasErrors;
+                if (hasErrors) {
+                    submitBtn.style.opacity = '0.5';
+                    submitBtn.style.cursor = 'not-allowed';
+                } else {
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                }
+            }
+            
+            return isValid;
+        }
+        
+        function validateForm() {
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+            const privacyConsent = document.getElementById('privacy-consent');
+            const honeypot = document.querySelector('input[name="website"]');
+            
+            if (honeypot && honeypot.value !== '') {
+                return false; // Bot detected
+            }
+            
+            const isNameValid = validateField(name, false);
+            const isEmailValid = validateField(email, false);
+            const isMessageValid = validateField(message, false);
+            
+            // Validate privacy consent checkbox
+            let isConsentValid = true;
+            const consentError = document.getElementById('privacy-consent-error');
+            if (!privacyConsent.checked) {
+                isConsentValid = false;
+                if (consentError) {
+                    consentError.textContent = 'You must consent to data processing.';
+                    consentError.classList.add('active');
+                }
+            } else {
+                if (consentError) {
+                    consentError.textContent = '';
+                    consentError.classList.remove('active');
+                }
+            }
+            
+            return isNameValid && isEmailValid && isMessageValid && isConsentValid;
+        }
+        
+        // INSTANT validation on every keystroke
+        ['name', 'email', 'message'].forEach((fieldName) => {
+            const field = document.getElementById(fieldName);
+            if (field) {
+                // Validate on blur (complete check)
+                field.addEventListener('blur', () => {
+                    validateField(field, false);
+                });
+                
+                // INSTANT validation on input (no debounce for email domain check)
+                field.addEventListener('input', () => {
+                    if (fieldName === 'email') {
+                        // INSTANT check for blocked domains
+                        validateField(field, true);
+                    } else {
+                        // Light validation for name and message
+                        validateField(field, true);
+                    }
+                });
+            }
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validate form before submission
+            if (!validateForm()) {
+                // Scroll to first error
+                const firstError = document.querySelector('.error-message.active');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const alertContainer = document.getElementById('contact-alerts');
+            const originalHTML = submitBtn.innerHTML;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i data-lucide="loader-2" class="btn-icon" style="animation: spin 1s linear infinite;"></i><span>Sending...</span>';
+            lucide.createIcons({ icons: lucide.icons });
+            
+            // Clear previous alerts
+            alertContainer.innerHTML = '';
+            
+            try {
+                const formData = new FormData(e.target);
+                const response = await fetch('/send-contact.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.ok) {
+                    // Success
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-success">
+                            <i data-lucide="check-circle" class="alert-icon"></i>
+                            <div>${result.message}</div>
+                        </div>
+                    `;
+                    e.target.reset();
+                } else {
+                    // Error
+                    alertContainer.innerHTML = `
+                        <div class="alert alert-error">
+                            <i data-lucide="x-circle" class="alert-icon"></i>
+                            <div>${result.message}</div>
+                        </div>
+                    `;
+                }
+                
+                lucide.createIcons({ icons: lucide.icons });
+                
+                // Scroll to alert
+                alertContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } catch (error) {
+                alertContainer.innerHTML = `
+                    <div class="alert alert-error">
+                        <i data-lucide="x-circle" class="alert-icon"></i>
+                        <div>Network error. Please try again or email directly: your@email.com</div>
+                    </div>
+                `;
+                lucide.createIcons({ icons: lucide.icons });
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalHTML;
+                lucide.createIcons({ icons: lucide.icons });
+            }
+        });
+
+        // Spinner animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

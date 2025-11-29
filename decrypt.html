@@ -1,0 +1,414 @@
+<!--
+  encryptor.app - DECRYPT TEXT
+  Version 2.2.0 | AES-256-GCM | Zero-Knowledge
+  
+  Built by: George A. Rauscher
+  Company: intelligent piXel GmbH, Starnberg, Germany
+  GitHub: https://github.com/georgerauscher/encryptor-app
+  License: MIT
+-->
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <!--  SECURITY META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <title>Decrypt Message - AES-256-GCM | encryptor.app</title>
+    <meta name="description" content="Decrypt AES-256-GCM encrypted messages. Client-side only. Zero-knowledge. Your data never touches our servers. Free forever.">
+    <meta name="keywords" content="decrypt text, AES-256, text decryption, decrypt message, decrypt online, client-side decryption">
+    <meta name="robots" content="noindex, nofollow, noai, noimageai">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <i data-lucide="shield-check" class="nav-icon"></i>
+                <span>encryptor.app </span>
+            </div>
+            <div class="nav-links">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./encrypt.html" class="nav-link">Encrypt Text</a>
+                <a href="./decrypt.html" class="nav-link active">Decrypt Text</a>
+                <a href="./encrypt-file.html" class="nav-link">Encrypt File</a>
+                <a href="./decrypt-file.html" class="nav-link">Decrypt File</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <h1>Decrypt Message</h1>
+                    <p>Your text will be decrypted in your browser. It never touches our servers.</p>
+                </div>
+
+                <div id="alertContainer"></div>
+
+                <form id="decryptForm">
+                    <div class="form-group">
+                        <label for="ciphertext" class="form-label">
+                            <i data-lucide="file-lock" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                            Encrypted Message
+                        </label>
+                        <textarea 
+                            id="ciphertext" 
+                            class="form-textarea" 
+                            placeholder="Paste the encrypted message here..."
+                            rows="8"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">
+                            <i data-lucide="key" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                            Password
+                        </label>
+                        <div class="password-group">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="form-input" 
+                                placeholder="Enter the password used to encrypt"
+                                required
+                                style="padding-right: 45px;"
+                            >
+                            <button type="button" class="password-toggle" id="togglePassword" aria-label="Toggle password visibility">
+                                <i data-lucide="eye" class="password-toggle-icon" id="toggleIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="decryptBtn">
+                            <i data-lucide="unlock" class="btn-icon"></i>
+                            <span>Decrypt Message</span>
+                        </button>
+                        <a href="./index.html" class="btn btn-secondary">
+                            <i data-lucide="arrow-left" class="btn-icon"></i>
+                            <span>Back to Home</span>
+                        </a>
+                    </div>
+                </form>
+
+                <div id="resultContainer" class="hidden">
+                    <div class="result-card">
+                        <label class="result-label">
+                            <i data-lucide="check-circle" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; color: var(--green-500);"></i>
+                            Decrypted Message
+                        </label>
+                        <div class="result-output" id="decryptedOutput"></div>
+                        <div class="form-actions" style="margin-top: var(--spacing-md);">
+                            <button type="button" class="btn btn-success" id="copyBtn">
+                                <i data-lucide="copy" class="btn-icon"></i>
+                                <span>Copy to Clipboard</span>
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="resetBtn">
+                                <i data-lucide="refresh-cw" class="btn-icon"></i>
+                                <span>Decrypt Another</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning" style="margin-top: var(--spacing-lg);">
+                        <i data-lucide="shield-alert" class="alert-icon"></i>
+                        <div>
+                            <strong>Security Notice:</strong> Make sure to delete the decrypted message 
+                            after reading if you no longer need it. Secure communication requires secure cleanup.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOW DECRYPTION WORKS -->
+            <div class="info-card" style="margin-top: var(--spacing-xl);">
+                <h2 style="font-size: 1.5rem; color: var(--slate-100); margin-bottom: var(--spacing-md);">
+                    <i data-lucide="unlock" style="width: 28px; height: 28px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;"></i>
+                    How Text Decryption Works
+                </h2>
+                <p style="color: var(--slate-300); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem;">
+                    Decryption mirrors the encryption process in reverse. Your encrypted text stays in your browser's memory and never 
+                    touches our servers. Here's what happens when you click "Decrypt Message":
+                </p>
+                
+                <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+                    <div class="step-container">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Parse Encrypted Data</h3>
+                            <p class="step-text">
+                                Your encrypted text is Base64-decoded into binary data. The browser extracts the salt (16 bytes), 
+                                IV (12 bytes), ciphertext, and authentication tag from the encrypted package.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Derive Decryption Key</h3>
+                            <p class="step-text">
+                                Using the extracted salt and your password, the browser runs PBKDF2-SHA-256 with 100,000 iterations 
+                                to derive the same 256-bit key that was used for encryption. Wrong password = wrong key = decryption fails.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Verify and Decrypt</h3>
+                            <p class="step-text">
+                                AES-256-GCM verifies the authentication tag before decryption. If the ciphertext was tampered with 
+                                or the password is wrong, the authentication check fails and decryption stops immediately. No partial decryption.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Display Original Message</h3>
+                            <p class="step-text">
+                                If authentication passes, the ciphertext is decrypted and your original plaintext message is displayed. 
+                                Identical to what was encrypted. If anything fails, you see "Wrong password or corrupted data" - by design.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; display: grid; gap: 1rem;">
+                    <div class="warning-box error">
+                        <p>
+                            <strong class="warning-label error">Wrong Password:</strong> If you enter the wrong password, decryption will fail 
+                            immediately. There is no password recovery. No hints. No backdoors. Write it down securely or use a password manager.
+                        </p>
+                    </div>
+                    
+                    <div class="warning-box warning">
+                        <p>
+                            <strong class="warning-label warning">Tamper Detection:</strong> If anyone modified the encrypted text 
+                            (even one character), the GCM authentication tag will fail and decryption stops. You get the original message or nothing.
+                        </p>
+                    </div>
+
+                    <div class="warning-box info">
+                        <p>
+                            <strong class="warning-label info">Zero-Knowledge Guarantee:</strong> Your encrypted text never leaves your browser. 
+                            We don't see your ciphertext, your password, or your decrypted message. The server only delivers static files.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TECHNICAL SPECS -->
+            <div class="info-card" style="margin-top: 1.5rem;">
+                <h2 style="font-size: 1.5rem; color: var(--slate-100); margin-bottom: var(--spacing-md);">
+                    <i data-lucide="shield-check" style="width: 28px; height: 28px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;"></i>
+                    Why This Is Secure
+                </h2>
+                
+                <p style="color: var(--slate-300); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem;">
+                    <strong style="color: var(--slate-200);">Zero-Knowledge means exactly that:</strong>
+                </p>
+
+                <ul style="color: var(--slate-400); line-height: 1.8; margin-bottom: 1.5rem; margin-left: 1.5rem;">
+                    <li>We don't see your encrypted text (never uploaded)</li>
+                    <li>We don't see your password (entered in your browser only)</li>
+                    <li>We don't see your decrypted message (displayed in your browser)</li>
+                    <li>We don't log when you decrypt (no analytics, no tracking)</li>
+                    <li>We can't decrypt your message even if we wanted to (we never receive it)</li>
+                </ul>
+
+                <p style="color: var(--slate-300); line-height: 1.7; font-size: 1rem;">
+                    This isn't a privacy promise. <strong style="color: var(--slate-200);">It's a technical reality.</strong> 
+                    The architecture makes it impossible for us to access your messages. Client-side encryption isn't just more private - 
+                    it's the only way to guarantee privacy.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--slate-700);">
+                    <div>
+                        <div style="color: var(--slate-500); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.375rem;">Decryption Algorithm</div>
+                        <div style="color: var(--slate-200); font-weight: 600;">AES-256-GCM</div>
+                        <div style="color: var(--slate-400); font-size: 0.875rem;">Authenticated decryption</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--slate-500); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.375rem;">Key Derivation</div>
+                        <div style="color: var(--slate-200); font-weight: 600;">PBKDF2-SHA-256</div>
+                        <div style="color: var(--slate-400); font-size: 0.875rem;">Same 100,000 iterations</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--slate-500); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.375rem;">Tampering Detection</div>
+                        <div style="color: var(--slate-200); font-weight: 600;">GCM Auth Tags</div>
+                        <div style="color: var(--slate-400); font-size: 0.875rem;">Automatic verification</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--slate-500); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.375rem;">Processing Location</div>
+                        <div style="color: var(--slate-200); font-weight: 600;">Your Browser</div>
+                        <div style="color: var(--slate-400); font-size: 0.875rem;">Never server-side</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p class="footer-text">
+                    Copyright 2025, <a href="https://rauscher.xyz" style="color: inherit; text-decoration: none;" target="_blank" rel="noopener">George A. Rauscher</a><br>
+                    Version 2.2.0 - Zero-Knowledge Encryption
+                </p>
+            </div>
+            <div class="footer-section">
+                <a href="./imprint.php" class="footer-link">Imprint</a>
+                <span class="footer-separator">|</span>
+                <a href="./privacy.php" class="footer-link">Privacy</a>
+                <span class="footer-separator">|</span>
+                <a href="#licenses" class="footer-link licenses-trigger">Licenses</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/lucide.js?v=2.2.3"></script>
+    <script src="./licenses-modal.js?v=20251129185000"></script>
+    <script src="./crypto.js?v=2.2.3"></script>
+    <script>
+        // Initialize Lucide icons IMMEDIATELY (no DOMContentLoaded)
+        if (typeof lucide !== 'undefined' && lucide.icons) {
+            lucide.createIcons({ icons: lucide.icons });
+        } else {
+            console.error('Lucide not loaded or icons not available!');
+        }
+    
+        // Password visibility toggle
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+        const toggleIcon = document.getElementById('toggleIcon');
+        
+        toggleButton.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            toggleIcon.setAttribute('data-lucide', type === 'password' ? 'eye' : 'eye-off');
+            lucide.createIcons({ icons: lucide.icons });
+        });
+
+        // Form submission
+        document.getElementById('decryptForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const ciphertext = document.getElementById('ciphertext').value;
+            const password = passwordInput.value;
+            
+            try {
+                const decryptBtn = document.getElementById('decryptBtn');
+                decryptBtn.disabled = true;
+                decryptBtn.innerHTML = '<i data-lucide="loader-2" class="btn-icon" style="animation: spin 1s linear infinite;"></i><span>Decrypting...</span>';
+                lucide.createIcons({ icons: lucide.icons });
+                
+                const decrypted = await decryptText(ciphertext, password);
+                
+                document.getElementById('decryptedOutput').textContent = decrypted;
+                document.getElementById('resultContainer').classList.remove('hidden');
+                document.getElementById('decryptForm').style.display = 'none';
+                
+                showAlert('Message decrypted successfully!', 'success');
+            } catch (error) {
+                let errorMessage = 'Decryption failed. ';
+                
+                if (error.message.includes('Invalid') || error.message.includes('format')) {
+                    errorMessage += 'The encrypted message appears to be corrupted or invalid.';
+                } else if (error.message.includes('password')) {
+                    errorMessage += 'Wrong password or corrupted data.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showAlert(errorMessage, 'error');
+                
+                const decryptBtn = document.getElementById('decryptBtn');
+                decryptBtn.disabled = false;
+                decryptBtn.innerHTML = '<i data-lucide="unlock" class="btn-icon"></i><span>Decrypt Message</span>';
+                lucide.createIcons({ icons: lucide.icons });
+            }
+        });
+
+        // Copy to clipboard
+        document.getElementById('copyBtn').addEventListener('click', async () => {
+            const output = document.getElementById('decryptedOutput').textContent;
+            
+            try {
+                await navigator.clipboard.writeText(output);
+                const copyBtn = document.getElementById('copyBtn');
+                const originalHTML = copyBtn.innerHTML;
+                
+                copyBtn.innerHTML = '<i data-lucide="check" class="btn-icon"></i><span>Copied!</span>';
+                lucide.createIcons({ icons: lucide.icons });
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    lucide.createIcons({ icons: lucide.icons });
+                }, 2000);
+                
+                showAlert('Decrypted message copied to clipboard!', 'success');
+            } catch (error) {
+                showAlert('Failed to copy: ' + error.message, 'error');
+            }
+        });
+
+        // Reset form
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            document.getElementById('decryptForm').reset();
+            document.getElementById('decryptForm').style.display = 'block';
+            document.getElementById('resultContainer').classList.add('hidden');
+            passwordInput.type = 'password';
+            toggleIcon.setAttribute('data-lucide', 'eye');
+            lucide.createIcons({ icons: lucide.icons });
+            clearAlerts();
+        });
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const iconName = type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'alert-triangle';
+            
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <i data-lucide="${iconName}" class="alert-icon"></i>
+                <div>${message}</div>
+            `;
+            
+            alertContainer.appendChild(alert);
+            lucide.createIcons({ icons: lucide.icons });
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        function clearAlerts() {
+            document.getElementById('alertContainer').innerHTML = '';
+        }
+
+        // Keyframe for spinner animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+

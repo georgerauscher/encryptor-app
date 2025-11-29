@@ -1,0 +1,355 @@
+<!--
+  encryptor.app - DECRYPT FILE
+  Version 2.2.0 | AES-256-GCM | Zero-Knowledge
+  
+  Built by: George A. Rauscher
+  Company: intelligent piXel GmbH, Starnberg, Germany
+  GitHub: https://github.com/georgerauscher/encryptor-app
+  License: MIT
+-->
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <!--  SECURITY META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <title>Decrypt File - AES-256-GCM | encryptor.app</title>
+    <meta name="description" content="Decrypt files encrypted with encryptor.app. Client-side only. Zero-knowledge. Your file never leaves your device.">
+    <meta name="keywords" content="decrypt file, AES-256, file decryption, secure file, decrypt online, client-side decryption">
+    <meta name="robots" content="noindex, nofollow, noai, noimageai">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <i data-lucide="shield-check" class="nav-icon"></i>
+                <span>encryptor.app </span>
+            </div>
+            <div class="nav-links">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./encrypt.html" class="nav-link">Encrypt Text</a>
+                <a href="./decrypt.html" class="nav-link">Decrypt Text</a>
+                <a href="./encrypt-file.html" class="nav-link">Encrypt File</a>
+                <a href="./decrypt-file.html" class="nav-link active">Decrypt File</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <h1>
+                        <i data-lucide="file-key" style="width: 32px; height: 32px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;"></i>
+                        Decrypt Your Files
+                    </h1>
+                    <p style="font-size: 1.125rem; color: var(--slate-300); margin-bottom: 1rem;">
+                        Securely. Privately. In Your Browser.
+                    </p>
+                    <p style="font-size: 0.9375rem; color: var(--slate-400); line-height: 1.6;">
+                        Upload your <code style="background: var(--slate-800); padding: 0.125rem 0.375rem; border-radius: 0.25rem; color: var(--blue-400); font-family: 'Courier New', monospace;">.encrypted</code> file, enter your password, and get your original file back. All processing happens in your browser - we never see your encrypted file or password.
+                    </p>
+                </div>
+
+                <div id="alertContainer"></div>
+
+                <form id="decryptFileForm">
+                    <!-- FILE UPLOAD ZONE -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i data-lucide="upload" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                            Select Encrypted File
+                        </label>
+                        
+                        <div id="decryptDropZone" class="drop-zone">
+                            <input type="file" id="decryptFileInput" class="file-input" accept=".encrypted" required>
+                            <div class="drop-zone-content">
+                                <i data-lucide="file-lock" style="width: 48px; height: 48px; color: var(--blue-500); margin-bottom: 1rem;"></i>
+                                <p style="font-size: 1.125rem; font-weight: 500; color: var(--slate-200); margin-bottom: 0.5rem;">
+                                    Drop .encrypted file here or click to browse
+                                </p>
+                                <p style="font-size: 0.875rem; color: var(--slate-400);">
+                                    Only .encrypted files are supported
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- FILE INFO (hidden until file selected) -->
+                        <div id="decryptFileInfo" class="file-info" style="display: none;">
+                            <div class="file-info-content">
+                                <div class="file-info-icon">
+                                    <i data-lucide="file-lock" style="width: 24px; height: 24px;"></i>
+                                </div>
+                                <div class="file-info-details">
+                                    <div class="file-info-name" id="decryptFileName">document.pdf.encrypted</div>
+                                    <div class="file-info-meta">
+                                        <span id="decryptFileSize">1.2 MB</span>
+                                        <span style="margin: 0 0.5rem; color: var(--slate-600);">•</span>
+                                        <span>Encrypted File</span>
+                                    </div>
+                                </div>
+                                <button type="button" id="decryptRemoveFileBtn" class="file-info-remove" title="Remove file">
+                                    <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">
+                            <i data-lucide="key" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                            Password
+                        </label>
+                        <div class="password-group">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="form-input" 
+                                placeholder="Enter the password used for encryption..."
+                                required
+                                minlength="8"
+                            >
+                            <button type="button" id="togglePassword" class="password-toggle" title="Show/Hide password">
+                                <i data-lucide="eye" class="password-toggle-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PROGRESS BAR (hidden until decryption starts) -->
+                    <div id="progressContainer" class="progress-container" style="display: none;">
+                        <div class="progress-header">
+                            <div class="spinner"></div>
+                            <span id="progressLabel">Decrypting file...</span>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <div class="progress-details">
+                            <span id="progressDetails">Preparing decryption...</span>
+                            <span id="progressTime">Estimated time: calculating...</span>
+                        </div>
+                    </div>
+
+                    <!-- BUTTONS -->
+                    <div style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-xl);">
+                        <button type="submit" id="decryptBtn" class="btn btn-primary" style="flex: 1;">
+                            <i data-lucide="unlock" class="btn-icon"></i>
+                            <span>Decrypt File</span>
+                        </button>
+                        
+                        <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">
+                            <i data-lucide="x" class="btn-icon"></i>
+                            <span>Cancel</span>
+                        </button>
+                    </div>
+
+                    <!-- INFO ALERT -->
+                    <div class="alert alert-info" style="margin-top: var(--spacing-lg);">
+                        <i data-lucide="info" class="alert-icon"></i>
+                        <div>
+                            <strong>Password Required:</strong> You must use the exact same password that was used to encrypt this file. 
+                            If you enter the wrong password, decryption will fail and the authentication check will detect tampering.
+                        </div>
+                    </div>
+                </form>
+
+                <!-- SUCCESS MESSAGE (hidden until decryption complete) -->
+                <div id="successContainer" style="display: none;">
+                    <div class="alert alert-success" style="margin-bottom: var(--spacing-lg);">
+                        <i data-lucide="check-circle" class="alert-icon"></i>
+                        <div>
+                            <strong>File decrypted successfully!</strong><br>
+                            <span id="originalFileName">document.pdf</span> is ready for download.
+                        </div>
+                    </div>
+
+                    <button type="button" id="downloadBtn" class="btn btn-primary" style="width: 100%; margin-bottom: var(--spacing-md);">
+                        <i data-lucide="download" class="btn-icon"></i>
+                        <span>Download Decrypted File</span>
+                    </button>
+
+                    <button type="button" id="decryptAnotherBtn" class="btn btn-secondary" style="width: 100%;">
+                        <i data-lucide="refresh-cw" class="btn-icon"></i>
+                        <span>Decrypt Another File</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- HOW DECRYPTION WORKS -->
+            <div class="info-card" style="margin-top: var(--spacing-xl);">
+                <h2 style="font-size: 1.5rem; color: var(--slate-100); margin-bottom: var(--spacing-md);">
+                    <i data-lucide="unlock" style="width: 28px; height: 28px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;"></i>
+                    From Encrypted to Original in Seconds
+                </h2>
+                <p style="color: var(--slate-300); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem;">
+                    Your encrypted file stays in your browser's memory. We never upload it. We never see your password. The decryption happens entirely on your device using the same military-grade algorithms that encrypted it.
+                </p>
+                
+                <div style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+                    <!-- Step 1 -->
+                    <div class="step-container">
+                        <div style="flex-shrink: 0;">
+                            <div class="step-number">1</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">Upload Your .encrypted File</h3>
+                            <p class="step-text">
+                                Drag & drop or click to browse. The file stays in your browser's memory - no server upload. Only <code style="background: var(--slate-800); padding: 0.125rem 0.375rem; border-radius: 0.25rem; color: var(--blue-400); font-family: 'Courier New', monospace;">.encrypted</code> files created by encryptor.app are supported.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-container">
+                        <div style="flex-shrink: 0;">
+                            <div class="step-number">2</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">Enter Your Password</h3>
+                            <p class="step-text">
+                                Must be the exact password used for encryption. <strong style="color: var(--slate-300);">We can't help if you forget it</strong> (that's the point). No password recovery because we never stored it. No backdoors. No master keys.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-container">
+                        <div style="flex-shrink: 0;">
+                            <div class="step-number">3</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">Your Browser Decrypts</h3>
+                            <p class="step-text">
+                                The encrypted file is parsed to extract the salt, IVs, and encrypted chunks. Your password is transformed into the decryption key using the same PBKDF2 process (100,000 iterations). Each chunk is decrypted and verified for tampering using AES-256-GCM authentication tags.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-container">
+                        <div style="flex-shrink: 0;">
+                            <div class="step-number">4</div>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="step-title">Download Your Original File</h3>
+                            <p class="step-text">
+                                Original filename automatically restored. File type preserved. Identical to the file you encrypted. If the password is wrong or the file has been tampered with, decryption fails immediately - by design.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Warnings -->
+                <div style="margin-top: 2rem; display: grid; gap: 1rem;">
+                    <div class="warning-box error">
+                        <p style="color: var(--slate-200); line-height: 1.7; margin: 0; font-size: 0.9375rem;">
+                            <strong class="warning-label error">Wrong Password:</strong> If you enter the wrong password, decryption will fail immediately with "Wrong password or corrupted file." There is no password recovery. No hints. No backdoors. Write it down securely.
+                        </p>
+                    </div>
+                    
+                    <div class="warning-box warning">
+                        <p style="color: var(--slate-200); line-height: 1.7; margin: 0; font-size: 0.9375rem;">
+                            <strong class="warning-label warning">File Tampering:</strong> If anyone modified the encrypted file (even one byte), the authentication tags will fail and decryption stops. This is intentional - GCM mode guarantees you get the original file or nothing.
+                        </p>
+                    </div>
+
+                    <div class="warning-box info">
+                        <p style="color: var(--slate-200); line-height: 1.7; margin: 0; font-size: 0.9375rem;">
+                            <strong class="warning-label info">Secure Cleanup:</strong> After downloading your decrypted file, delete it from your Downloads folder if you don't need it anymore. Encryption protects files in transit, but once decrypted, they're just regular files again.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TECHNICAL SPECS -->
+            <div class="info-card" style="margin-top: 1.5rem;">
+                <h2 style="font-size: 1.5rem; color: var(--slate-100); margin-bottom: var(--spacing-md);">
+                    <i data-lucide="shield-check" style="width: 28px; height: 28px; display: inline-block; vertical-align: middle; margin-right: 0.5rem;"></i>
+                    Why This Is Secure
+                </h2>
+                
+                <p style="color: var(--slate-300); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem;">
+                    <strong style="color: var(--slate-200);">Zero-Knowledge means exactly that:</strong>
+                </p>
+
+                <ul style="color: var(--slate-400); line-height: 1.8; margin-bottom: 1.5rem;">
+                    <li>We don't see your encrypted file (never uploaded)</li>
+                    <li>We don't see your password (entered in your browser only)</li>
+                    <li>We don't see your metadata (filename, file type, timestamps)</li>
+                    <li>We don't log when you decrypt (no analytics, no tracking)</li>
+                    <li>We can't decrypt your file even if we wanted to (we never receive it)</li>
+                </ul>
+
+                <p style="color: var(--slate-300); line-height: 1.7; font-size: 1rem;">
+                    This isn't a privacy promise. <strong style="color: var(--slate-200);">It's a technical reality.</strong> The architecture makes it impossible for us to access your files. Client-side encryption isn't just more private - it's the only way to guarantee privacy.
+                </p>
+
+                <div class="tech-spec-grid" style="padding-top: 1.5rem; border-top: 1px solid var(--slate-700);">
+                    <div>
+                        <div class="tech-spec-label">Decryption Algorithm</div>
+                        <div class="tech-spec-value">AES-256-GCM</div>
+                        <div class="tech-spec-desc">Authenticated decryption</div>
+                    </div>
+                    <div>
+                        <div class="tech-spec-label">Key Derivation</div>
+                        <div class="tech-spec-value">PBKDF2-SHA-256</div>
+                        <div class="tech-spec-desc">Same 100,000 iterations</div>
+                    </div>
+                    <div>
+                        <div class="tech-spec-label">Tampering Detection</div>
+                        <div class="tech-spec-value">GCM Auth Tags</div>
+                        <div class="tech-spec-desc">Per-chunk verification</div>
+                    </div>
+                    <div>
+                        <div class="tech-spec-label">Processing Location</div>
+                        <div class="tech-spec-value">Your Browser</div>
+                        <div class="tech-spec-desc">Never server-side</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p class="footer-text">
+                    Copyright 2025, <a href="https://rauscher.xyz" style="color: inherit; text-decoration: none;" target="_blank" rel="noopener">George A. Rauscher</a><br>
+                    Version 2.2.0 - Zero-Knowledge Encryption
+                </p>
+            </div>
+            <div class="footer-section">
+                <a href="./imprint.php" class="footer-link">Imprint</a>
+                <span class="footer-separator">|</span>
+                <a href="./privacy.php" class="footer-link">Privacy</a>
+                <span class="footer-separator">|</span>
+                <a href="#licenses" class="footer-link licenses-trigger">Licenses</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/lucide.js?v=2.2.3"></script>
+    <script src="./js/password-strength.js?v=2.2.3"></script>
+    <script src="./licenses-modal.js?v=20251129185000"></script>
+    <script src="./crypto-file.js?v=2.2.3"></script>
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined' && lucide.icons) {
+            lucide.createIcons({ icons: lucide.icons });
+        }
+    </script>
+</body>
+</html>
+
