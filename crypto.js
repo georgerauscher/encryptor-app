@@ -256,7 +256,7 @@ console.log(`
 ║  Architecture:   Zero-knowledge (100% client-side)       ║
 ║                                                           ║
 ║  Copyright 2025, George A. Rauscher                      ║
-║  https://yourwebsite.com                                    ║
+║  https://encryptor.app                                      ║
 ╚═══════════════════════════════════════════════════════════╝
 
 Security Notes:
