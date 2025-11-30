@@ -34,35 +34,18 @@ temp/
 
 # Environment Files
 .env
-.env.local
+.env.*
 
-# Security (Rate Limiting - Runtime Data)
+# Runtime Data
 security/rate-limit-*.json
 
-# Composer Binary (use composer install instead)
+# Dependencies (use composer install)
 composer.phar
-
-# PHPMailer Vendor (use composer install)
 vendor/
 
-# Reports (internal development)
-Reports/
+# Local Development
+*.local
+*.dev
 
-# Session files (development notes)
-SESSION-*.md
-
-# Internal Documentation (not for public)
-ENDABNAHME.md
-SYSTEM-ACCEPTANCE-REPORT-*.md
-TEST-REPORT*.md
-MARKETING-COPY.md
-
-# Backup Files
-*.txt.backup
-*.js.backup
-
-# Duplicate Text Files
-imprint.txt
-privacy.txt
-
+# Well-Known (ACME challenges etc.)
 .well-known/
