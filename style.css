@@ -250,7 +250,7 @@ main {
 }
 
 .hero-gradient {
-    /* Fallback für Safari/ältere Browser */
+    /* Fallback for Safari and older browsers */
     color: var(--blue-500);
     
     /* Gradient Text Effect */
@@ -260,7 +260,7 @@ main {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     
-    /* Safari Fix: Muss inline-block sein */
+    /* Safari Fix: Must be inline-block */
     display: inline-block;
     
     /* Smooth rendering */
