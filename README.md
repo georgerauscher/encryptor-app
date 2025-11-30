@@ -130,7 +130,7 @@ Encrypt personal documents before cloud storage.
 ### Encryption
 - **Algorithm**: AES-256-GCM (Authenticated Encryption)
 - **Key Derivation**: PBKDF2-SHA-256
-- **Iterations**: 600,000 (OWASP 2023 recommendation)
+- **Iterations**: 100,000 (OWASP recommended minimum)
 - **Salt**: 16 bytes (cryptographically random)
 - **IV**: 12 bytes (cryptographically random)
 - **Tag**: 128 bits (authentication)
@@ -264,17 +264,6 @@ For full legal information, see the Imprint and Privacy Policy pages.
 
 ---
 
-## Roadmap
-
-- [ ] Multi-language support (German, French, Spanish)
-- [ ] Progressive Web App (PWA) with offline support
-- [ ] Mobile app versions (iOS/Android)
-- [ ] Browser extension
-- [ ] Advanced key management
-- [ ] Team sharing features (still client-side!)
-
----
-
 ## Why Open Source?
 
 **Transparency** is essential for security tools. Open source allows:
@@ -289,18 +278,13 @@ For full legal information, see the Imprint and Privacy Policy pages.
 
 ## Contributing
 
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+Thank you for your interest! This project is maintained by George A. Rauscher.
 
-**Code style:**
-- Clean, readable code
-- No external dependencies (except Web Crypto API)
-- Maintain security-first approach
-- Comment complex logic
+**Bug Reports:** Please open an issue on GitHub with details.
+
+**Security Vulnerabilities:** Report privately to george@rauscher.xyz
+
+**Pull Requests:** Currently not accepting external PRs to ensure security and code integrity. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 

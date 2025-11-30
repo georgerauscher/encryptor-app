@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - **Imprint:** Replaced personal company/contact data with placeholders (YOUR COMPANY NAME, your@email.com)
 - **Privacy Policy:** Anonymized personal data (YOUR NAME OR COMPANY, Your Street Address, etc.)
 - **User Customization:** Easy placeholders for users to insert their own legal information
-- **Mandatory Attribution:** George A. Rauscher credit retained in footer (MIT License requirement)
+- **Mandatory Attribution:** "Powered by encryptor.app" link required in footer (MIT License requirement)
 
 #### Configuration & Installation
 - **SMTP Config:** Fixed hardcoded server paths in send-contact.php
@@ -366,13 +366,14 @@ All notable changes to this project will be documented in this file.
 
 ## License
 
-© 2025 George A. Rauscher
-intelligent piXel GmbH
-International Institute of Forensic Expertise (IIFE)  
-All Rights Reserved
+MIT License - See [LICENSE](LICENSE) for details.
+
+© 2025 George A. Rauscher  
+intelligent piXel GmbH  
+International Institute of Forensic Expertise (IIFE)
 
 ---
 
-**Last Updated:** 2025-11-02 15:45 Berlin  
+**Last Updated:** 2025-11-30 Berlin  
 **Status:** Production Ready - Version 2.2.0 LIVE  
-**Live URL:** Your deployment URL
+**Live URL:** https://encryptor.app
