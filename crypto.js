@@ -243,33 +243,3 @@ if (!isCryptoSupported()) {
     alert('Your browser does not support the Web Crypto API. Please use a modern browser (Chrome, Firefox, Safari, Edge).');
 }
 
-/**
- * Security notice for developers
- */
-console.log(`
-╔═══════════════════════════════════════════════════════════╗
-║                    encryptor.app v2.0                     ║
-║            Client-Side Encryption Library                 ║
-║                                                           ║
-║  Algorithm:     AES-256-GCM                              ║
-║  Key Derivation: PBKDF2-SHA-256 (100,000 iterations)    ║
-║  Architecture:   Zero-knowledge (100% client-side)       ║
-║                                                           ║
-║  Copyright 2025, George A. Rauscher                      ║
-║  https://encryptor.app                                      ║
-╚═══════════════════════════════════════════════════════════╝
-
-Security Notes:
-- All cryptographic operations happen in your browser
-- Your plaintext and password never touch our servers
-- Random salts and IVs prevent pattern analysis
-- GCM mode provides authenticated encryption
-- PBKDF2 with 100k iterations prevents brute-force attacks
-
-For maximum security:
-- Use passwords of at least 16 characters
-- Include mixed case, numbers, and symbols
-- Never reuse passwords across different messages
-- Share passwords via separate channels (not with encrypted text)
-`);
-
