@@ -75,12 +75,10 @@ For organizations requiring guaranteed response times, professional assistance, 
 **What's included:**
 - ✅ **Code review** of your customizations
 - ✅ **Vulnerability assessment** of your deployment
-- ✅ **Compliance consulting** (GDPR, HIPAA, ISO 27001)
-- ✅ **Penetration testing** coordination
 - ✅ **Security report** with recommendations
 - ✅ **Remediation assistance**
 
-**Best for:** Legal firms, healthcare providers, financial institutions, government agencies
+**Best for:** Organizations requiring independent security review
 
 **Provided by:** Forensic expert with 25+ years experience in digital forensics and IT security
 
@@ -206,7 +204,7 @@ Want to help make encryptor.app better?
 - Subject: "Security Vulnerability - CONFIDENTIAL"
 - Include: Type of vulnerability, location, proof of concept, impact assessment
 
-**Response:** 24h acknowledgment, 72h initial assessment, 90-day coordinated disclosure
+**Response:** We aim to acknowledge reports promptly and follow responsible disclosure practices.
 
 See [SECURITY.md](SECURITY.md) for full security policy.
 
@@ -227,7 +225,7 @@ See [SECURITY.md](SECURITY.md) for full security policy.
 **A:** Contributors are valued, but we cannot guarantee support priority. Commercial support packages ensure guaranteed response times.
 
 **Q: Is this software production-ready?**  
-**A:** Yes, encryptor.app is used in production by multiple organizations. However, you are responsible for your own deployment, configuration, and security.
+**A:** The software is stable and fully functional. However, you are responsible for your own deployment, configuration, and security.
 
 ---
 
