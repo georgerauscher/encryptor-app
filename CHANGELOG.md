@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.2.0-DEPLOY] - 2025-11-14
 
-### 🚀 GitHub Deployment Preparation
+### GitHub Deployment Preparation
 
 #### White-Label & Anonymization
 - **Imprint:** Replaced personal company/contact data with placeholders (YOUR COMPANY NAME, your@email.com)
@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.2.0] - 2025-11-02
 
-### 🔐 Security Enhancements - Quantum-Resistant Password Generation
+### Security Enhancements - Quantum-Resistant Password Generation
 
 #### Password Generator Improvements
 - **Length Increase:** 20 → 24 characters (~158 bits entropy)
@@ -59,7 +59,7 @@ All notable changes to this project will be documented in this file.
 - **Current:** 24 chars × log₂(94) ≈ 158 bits (79 bits post-quantum)
 - **Future-Proof:** Secure against quantum computers for 10-15+ years
 
-### 🧹 Code Quality & GitHub Preparation
+### Code Quality & GitHub Preparation
 
 #### Emoji Removal (Complete Cleanup)
 - **JavaScript Files:** Removed 20+ emojis from console.log statements
@@ -86,24 +86,24 @@ All notable changes to this project will be documented in this file.
 - **Function Calls:** Updated all 4 HTML pages to use correct API
 - **Consistency:** Ensured encrypt.html, encrypt-file.html, decrypt-file.html all use same password strength logic
 
-### 🎨 Code Quality & Cleanup
+### Code Quality & Cleanup
 - **JavaScript Headers:** Cleaned up and standardized header comments
 - **Comment Style:** Developer-friendly explanations
 - **Code Quality:** Removed duplicate comment blocks and cleaned up formatting
 - **Files Updated:** crypto.js, crypto-file.js
 
-### 🔧 Bug Fixes
+### Bug Fixes
 - **Licenses Modal:** Fixed broken modal due to incorrect script reference (licenses-modal.js-clean → licenses-modal.js)
 - **Script Loading:** Corrected 6 files with wrong script paths (decrypt.html, encrypt.html, encrypt-file.html, decrypt-file.html, imprint.php, privacy.php)
 - **Modal Functionality:** Restored working licenses popup across all pages
 
-### 📄 Legal Updates
+### Legal Updates
 - **Imprint:** Updated copyright section to reflect MIT License (removed "written consent required")
 - **Open Source Clarity:** Added clear statement about free use, modification, and distribution rights
 - **Third-Party Attribution:** Added Lucide Icons (ISC License) attribution with link to lucide.dev
 - **License Compliance:** Aligned imprint with actual MIT License terms
 
-### 🔒 Privacy & GDPR Compliance
+### Privacy & GDPR Compliance
 
 #### Local Asset Hosting
 - **Lucide Icons:** Moved from CDN to local hosting (/js/lucide.js, 549KB)
@@ -129,7 +129,7 @@ All notable changes to this project will be documented in this file.
 - **Three-Tier Liability:** Intent/gross negligence, slight negligence, personal injury
 - **Product Liability:** Unlimited liability for personal injury and Product Liability Act
 
-### 📊 Legal Assessment
+### Legal Assessment
 - **GDPR Compliance:** Note 1 (Sehr Gut)
 - **Abmahn-Risiko:** 0.5/10 (Minimal)
 - **Bußgeld-Risiko:** 0.5/10 (Minimal)
@@ -138,7 +138,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.1.0] - 2025-10-31
 
-### 🚀 Major Features
+### Major Features
 
 #### File Encryption/Decryption
 - **File Encryption:** Encrypt files up to 2GB client-side
@@ -154,7 +154,7 @@ All notable changes to this project will be documented in this file.
 - **Format:** Custom binary format with magic bytes validation
 - **Browser Memory:** Chunked processing prevents browser crashes
 
-### 🎨 UI/UX Improvements
+### UI/UX Improvements
 
 #### Mega-Spinner
 - **Size:** 120x120 pixels (highly visible)
@@ -170,7 +170,7 @@ All notable changes to this project will be documented in this file.
 - **Reset Functionality:** Clean page reload for "Another File" button
 - **Visual Feedback:** Custom alerts instead of browser popups
 
-### 🛠️ Code Quality
+### Code Quality
 
 #### Handcoded Appearance
 - **CSS Classes:** Replaced inline styles with proper CSS classes
@@ -180,10 +180,10 @@ All notable changes to this project will be documented in this file.
 
 #### Performance
 - **Cache Busting:** CSS versioning for browser cache control
-- **Lazy Loading:** Icons loaded via Lucide CDN
+- **Local Icons:** Lucide icons hosted locally for privacy
 - **Optimized Processing:** 100ms browser render pause before heavy operations
 
-### 📧 Contact Form (v2.1 Enhancement)
+### Contact Form (v2.1 Enhancement)
 
 #### Email Design
 - **HTML Template:** Beautiful email design matching encryptor.app style
@@ -212,7 +212,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.0.0] - 2025-10-29
 
-### 🛡️ Security - Multi-Layer Anti-Spam System
+### Security - Multi-Layer Anti-Spam System
 
 #### Rate Limiting
 - Max 3 emails per 10 minutes per IP address
@@ -247,7 +247,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.2.0] - 2025-10-29
 
-### ✨ Features
+### Features
 - **Live Form Validation:** Real-time validation on blur and input events
 - **Error Messages:** Visual feedback below each field
 - **Field Validation:**
@@ -259,7 +259,7 @@ All notable changes to this project will be documented in this file.
   - Error message spans with fade-in animation
   - Auto-scroll to first error on submit
 
-### 🎨 Design
+### Design
 - Error message styling with smooth animations
 - Red borders and shadows for invalid inputs
 - Consistent with encryptor.app design language
@@ -268,12 +268,12 @@ All notable changes to this project will be documented in this file.
 
 ## [1.1.0] - 2025-10-28
 
-### ✨ Features
+### Features
 - Basic contact form with Name, Email, Message fields
 - Client-side validation
 - PHP backend for email sending (mail() function)
 
-### 🎨 Design
+### Design
 - Modern UI with purple/blue color scheme
 - Glassmorphism effects
 - Responsive layout
@@ -283,7 +283,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.0] - 2025-10-27
 
-### 🚀 Initial Release
+### Initial Release
 - AES-256-GCM client-side encryption
 - PBKDF2-SHA-256 key derivation
 - Zero-knowledge architecture
@@ -341,7 +341,7 @@ All notable changes to this project will be documented in this file.
 ### v2.0.0
 - Changed email backend from PHP `mail()` to PHPMailer
 - Requires Composer and PHPMailer installation
-- SMTP configuration required in `/vhosts/encryptor.app/smtp-config.php`
+- SMTP configuration required (see smtp-config.example.php)
 
 ---
 

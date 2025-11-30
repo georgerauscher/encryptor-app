@@ -188,16 +188,12 @@ The author (George A. Rauscher) is **NOT liable** for:
 
 Want to help make encryptor.app better?
 
-**Contributions welcome:**
-- 🐛 Bug fixes
-- ✨ New features
-- 📖 Documentation improvements
-- 🌍 Translations
-- 🔒 Security enhancements
+**How you can help:**
+- Report bugs via GitHub Issues
+- Suggest improvements via GitHub Discussions
+- Report security vulnerabilities privately
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-**All contributors are credited** in release notes and project documentation.
+**Note:** We are currently not accepting Pull Requests to ensure security and code integrity. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 
