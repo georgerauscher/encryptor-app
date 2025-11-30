@@ -225,7 +225,7 @@ sed -i 's/\.js?v=[0-9]*/\.js/g' *.html *.php
 ### Nginx Configuration
 
 ```bash
-sudo nano /etc/nginx/sites-available/encryptor.app
+sudo nano /etc/nginx/sites-available/yourdomain.com
 ```
 
 **Nginx Config:**
@@ -233,7 +233,7 @@ sudo nano /etc/nginx/sites-available/encryptor.app
 server {
     listen 80;
     listen [::]:80;
-    server_name encryptor.app www.encryptor.app;
+    server_name yourdomain.com www.yourdomain.com;
     
     # Redirect HTTP to HTTPS
     return 301 https://$server_name$request_uri;
@@ -242,14 +242,14 @@ server {
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name encryptor.app www.encryptor.app;
+    server_name yourdomain.com www.yourdomain.com;
     
     root /var/www/mysite/httpdocs;
     index index.html;
     
     # SSL Configuration (Let's Encrypt)
-    ssl_certificate /etc/letsencrypt/live/encryptor.app/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/encryptor.app/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
     ssl_prefer_server_ciphers on;
@@ -296,7 +296,7 @@ server {
 
 **Enable site:**
 ```bash
-sudo ln -s /etc/nginx/sites-available/encryptor.app /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -304,14 +304,14 @@ sudo systemctl reload nginx
 ### Apache Configuration
 
 ```bash
-sudo nano /etc/apache2/sites-available/encryptor.app.conf
+sudo nano /etc/apache2/sites-available/yourdomain.com.conf
 ```
 
 **Apache Config:**
 ```apache
 <VirtualHost *:80>
-    ServerName encryptor.app
-    ServerAlias www.encryptor.app
+    ServerName yourdomain.com
+    ServerAlias www.yourdomain.com
     DocumentRoot /var/www/mysite/httpdocs
     
     # Redirect HTTP to HTTPS
@@ -319,14 +319,14 @@ sudo nano /etc/apache2/sites-available/encryptor.app.conf
 </VirtualHost>
 
 <VirtualHost *:443>
-    ServerName encryptor.app
-    ServerAlias www.encryptor.app
+    ServerName yourdomain.com
+    ServerAlias www.yourdomain.com
     DocumentRoot /var/www/mysite/httpdocs
     
     # SSL Configuration
     SSLEngine on
-    SSLCertificateFile /etc/letsencrypt/live/encryptor.app/fullchain.pem
-    SSLCertificateKeyFile /etc/letsencrypt/live/encryptor.app/privkey.pem
+    SSLCertificateFile /etc/letsencrypt/live/yourdomain.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/yourdomain.com/privkey.pem
     
     # Security Headers
     Header always set Strict-Transport-Security "max-age=31536000"
@@ -360,7 +360,7 @@ sudo nano /etc/apache2/sites-available/encryptor.app.conf
 **Enable site:**
 ```bash
 sudo a2enmod ssl headers rewrite
-sudo a2ensite encryptor.app
+sudo a2ensite yourdomain.com
 sudo apache2ctl configtest
 sudo systemctl reload apache2
 ```
@@ -384,8 +384,8 @@ sudo nano /etc/postfix/main.cf
 
 Add/modify:
 ```
-myhostname = encryptor.app
-mydomain = encryptor.app
+myhostname = yourdomain.com
+mydomain = yourdomain.com
 myorigin = $mydomain
 mydestination = $myhostname, localhost.$mydomain, localhost
 relayhost =
@@ -563,7 +563,7 @@ ls -la /var/www/mysite/httpdocs/crypto.js
 sudo apt install certbot python3-certbot-nginx
 
 # Obtain certificate
-sudo certbot --nginx -d encryptor.app -d www.encryptor.app
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
 # Auto-renewal is configured automatically
 # Test renewal
