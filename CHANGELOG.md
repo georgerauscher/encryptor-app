@@ -125,14 +125,9 @@ All notable changes to this project will be documented in this file.
 - **Legal Basis:** Changed to Art. 6 para. 1 lit. f (legitimate interest)
 
 #### Liability & Disclaimers
-- **§309 BGB Compliant:** Legally valid limitation of liability
+- **Legally Valid:** Limitation of liability compliant with applicable law
 - **Three-Tier Liability:** Intent/gross negligence, slight negligence, personal injury
-- **Product Liability:** Unlimited liability for personal injury and Product Liability Act
-
-### Legal Assessment
-- **GDPR Compliance:** Note 1 (Sehr Gut)
-- **Abmahn-Risiko:** 0.5/10 (Minimal)
-- **Bußgeld-Risiko:** 0.5/10 (Minimal)
+- **Product Liability:** Unlimited liability for personal injury
 
 ---
 
@@ -197,9 +192,9 @@ All notable changes to this project will be documented in this file.
 - **Plain-Text Fallback:** AltBody for email clients
 
 #### Localization
-- **Timezone:** Changed from UTC to Berlin (Europe/Berlin)
-- **Date Format:** German format (dd.mm.yyyy HH:MM:SS)
-- **Example:** `31.10.2025 18:30:00 Berlin`
+- **Timezone:** Configurable timezone support
+- **Date Format:** Localized date/time formatting
+- **Timestamps:** Included in all form submissions
 
 #### Security Enhancement
 - **Gmail Blocking:** gmail.com and gmail.de blocked
@@ -231,7 +226,7 @@ All notable changes to this project will be documented in this file.
 #### Advanced Pattern Detection
 - **Email Patterns:** Detects suspicious patterns like `name123@domain.com`
 - **Name Patterns:** Detects random names like `LeePreli`
-- **Language Detection:** Allows only German and English text
+- **Language Detection:** Filters non-Latin character spam
 - **Spam Keywords:** Filters common spam words (viagra, casino, crypto, price, etc.)
 
 #### Header Injection Protection
@@ -306,28 +301,6 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## Upcoming Features
-
-### Planned for v2.2.0
-- [ ] CSRF token protection
-- [ ] Persistent IP blacklist for repeat offenders
-- [ ] Admin panel for managing blocked domains
-- [ ] Statistics dashboard for form submissions
-- [ ] Email verification via API
-- [ ] Optional invisible reCAPTCHA
-
-### Under Consideration
-- [ ] SMS/Telegram/Slack notifications
-- [ ] A/B testing for email designs
-- [ ] Webhook support for integrations
-- [ ] Multi-language support for form
-- [ ] Custom spam filter rules via UI
-- [ ] File size limit increase (5GB+ with optimizations)
-- [ ] Batch file encryption
-- [ ] Archive encryption (.zip, .tar.gz)
-
----
-
 ## Breaking Changes
 
 ### v2.1.0
@@ -374,6 +347,6 @@ International Institute of Forensic Expertise (IIFE)
 
 ---
 
-**Last Updated:** 2025-11-30 Berlin  
+**Last Updated:** 2025-11-30  
 **Status:** Production Ready - Version 2.2.0 LIVE  
 **Live URL:** https://encryptor.app
