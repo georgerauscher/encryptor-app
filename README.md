@@ -1,300 +1,104 @@
-# Encryptor.app
+# encryptor
 
-**Client-Side Encryption for Messages and Files up to 2GB**
+Encrypt and decrypt files and text on your own device. No installation, no internet connection, no account.
 
-Built with forensic-grade security by **George A. Rauscher** (25+ years IT security experience)
+**Download [`index.html`](https://github.com/georgerauscher/encryptor-app/releases/latest/download/index.html) from the latest release and open it.** That single file is the whole tool. It runs in current desktop browsers on Windows, macOS, and Linux, even without an internet connection. You can pass it along on a USB drive or through a messaging app.
 
-**Live Demo:** [https://encryptor.app](https://encryptor.app)
+The same tool runs online at [encryptor.app](https://encryptor.app).
 
----
+Version 2.2, the former website edition, remains available under the tag [v2.2.0](https://github.com/georgerauscher/encryptor-app/tree/v2.2.0).
 
-## Features
+## Facts
 
-### Zero-Knowledge Encryption
-- AES-256-GCM (military-grade encryption)
-- All processing happens in your browser
-- No data ever touches our servers
-- No registration, no tracking, no logs
+| Property | Value |
+|---|---|
+| Encryption | AES-256-GCM (Web Crypto API) |
+| Key derivation | Argon2id, m = 64 MiB, t = 3, p = 4 ([hash-wasm](https://github.com/Daninet/hash-wasm) 4.12.0, MIT) |
+| Key hierarchy | Random file key, HKDF-SHA-512, header authenticated with HMAC-SHA-512 |
+| File format | Version 3: 1 MiB chunks, each bound to its position and to the end of the file; see [SPEC.md](SPEC.md) |
+| Passwords | Always generated: 26 Crockford Base32 characters (130 bits) plus 2 check characters that catch typing errors |
+| Metadata | File name, size, and type are encrypted; padding follows the PADMÉ scheme |
+| Version 2 | Files and text from encryptor 2.x can still be decrypted |
+| Network | None. The Content Security Policy of `index.html` forbids all connections. |
+| Dependencies | hash-wasm only, included; no CDN, no cookies, no analytics |
+| Languages | English, German |
 
-### File Encryption (up to 2GB)
-- Drag & drop interface
-- Handles large files efficiently
-- Encrypted files include password hint
-- Original filename preserved in metadata
+## Verify the file
 
-### Text Encryption
-- Quick message encryption
-- Copy encrypted text with one click
-- Perfect for secure communications
-- No character limits
-
-### Advanced Security
-- PBKDF2 key derivation (100,000 iterations)
-- Random salt for each encryption
-- Authentication tags prevent tampering
-- SHA-256 fingerprints for verification
-- **Quantum-resistant password generation** (24 chars, ~158 bits entropy)
-
-### Modern Tech Stack
-- Pure client-side JavaScript (Web Crypto API)
-- Progressive Web App ready
-- Works offline after first load
-- No dependencies, no tracking
-
----
-
-## Quick Start
-
-### Online
-Visit [encryptor.app](https://encryptor.app) and start encrypting immediately.
-
-### Self-Hosted
-```bash
-git clone https://github.com/georgerauscher/encryptor-app.git
-cd encryptor.app
-```
-
-Open `index.html` in any modern browser. That's it! No build process required.
-
----
-
-## How It Works
-
-### Encryption Process
-1. **Key Derivation**: Your password is processed through PBKDF2 (100,000 iterations)
-2. **Random Salt**: A unique salt is generated for each encryption
-3. **AES-256-GCM**: Military-grade encryption with authentication
-4. **Metadata**: Original filename and fingerprints are embedded
-5. **Download**: Encrypted file downloads automatically (.encrypted extension)
-
-### Decryption Process
-1. **Upload**: Select your encrypted file
-2. **Password**: Enter the password used for encryption
-3. **Verification**: Authentication tag ensures file wasn't tampered with
-4. **Restore**: Original file is restored with correct filename
-
----
-
-## Security Features
-
-### What Makes This Secure?
-
-**Client-Side Only**
-- All encryption happens in your browser
-- No server-side processing
-- No data transmission
-- No logs, no tracking
-
-**Strong Cryptography**
-- AES-256-GCM (NIST approved)
-- PBKDF2 with 100,000 iterations
-- Random salt per encryption
-- Authentication tags (AEAD)
-- **Quantum-resistant passwords:** 24 characters, 94-character charset (~158 bits entropy, ~79 bits post-quantum)
-
-**No Dependencies**
-- Uses native Web Crypto API
-- No external libraries
-- No tracking scripts
-- Lucide icons hosted locally (zero CDN, 100% privacy)
-
-**Privacy by Design**
-- No registration required
-- No email collection
-- No cookies
-- No analytics
-
----
-
-## Use Cases
-
-**Business Communications**
-Send confidential documents securely without enterprise email systems.
-
-**Healthcare Professionals**
-Share patient data while maintaining GDPR/HIPAA compliance.
-
-**Developers**
-Protect API keys, credentials, and sensitive configuration files.
-
-**Privacy Advocates**
-Communicate without trusting third-party services.
-
-**Personal Security**
-Encrypt personal documents before cloud storage.
-
----
-
-## Technical Specifications
-
-### Encryption
-- **Algorithm**: AES-256-GCM (Authenticated Encryption)
-- **Key Derivation**: PBKDF2-SHA-256
-- **Iterations**: 100,000 (OWASP recommended minimum)
-- **Salt**: 16 bytes (cryptographically random)
-- **IV**: 12 bytes (cryptographically random)
-- **Tag**: 128 bits (authentication)
-
-### Browser Requirements
-- Chrome 80+
-- Firefox 75+
-- Safari 14+
-- Edge 80+
-- Any browser with Web Crypto API support
-
-### File Size Limits
-- **Maximum**: 2GB per file
-- **Recommended**: Up to 500MB for best performance
-- **Large Files**: 500MB-2GB (may take longer on slower devices)
-
----
-
-## File Format
-
-Encrypted files use this structure:
+Compare the checksum of your copy with `SHA256SUMS` in this repository:
 
 ```
-[Magic Bytes: "ENC1"]
-[Salt: 16 bytes]
-[IV: 12 bytes]
-[Hint Length: 2 bytes]
-[Hint: UTF-8 string]
-[Filename Length: 2 bytes]
-[Filename: UTF-8 string]
-[Fingerprint Length: 2 bytes]
-[Fingerprint: UTF-8 string]
-[Encrypted Data + Auth Tag]
+shasum -a 256 index.html
 ```
 
-This format ensures:
-- Version compatibility
-- Tamper detection
-- Metadata preservation
-- Cross-platform support
+On Linux: `sha256sum index.html`. On Windows: `certutil -hashfile index.html SHA256`.
 
----
+## Build it yourself
 
-## Attribution
+`index.html` is generated from the readable source in `src/`. The build is reproducible: the result is byte-for-byte identical to the published file. Python 3.9 or later, no dependencies:
 
-**Built by:** George A. Rauscher  
-**Company:** intelligent piXel GmbH
-International Institute of Forensic Expertise (IIFE)  
-**Location:** Starnberg, Germany  
-**Experience:** 25+ years in IT security and digital forensics
+```
+python3 tools/build.py
+shasum -a 256 -c SHA256SUMS
+```
 
-If you use this project, please keep the footer attribution intact. It helps others discover this tool and supports continued development.
+On Linux, use `sha256sum -c SHA256SUMS` instead.
 
----
+| Path | Content |
+|---|---|
+| `src/core/` | Cryptographic core without DOM access: format v3, version 2 reader, password generator |
+| `src/app/` | User interface, styles, UI strings, page template |
+| `src/vendor/` | hash-wasm 4.12.0 (Argon2id), unmodified, with its license |
+| `tools/build.py` | Combines everything into `index.html` and computes the Content Security Policy hashes |
+| `SPEC.md` | Format specification |
+| `test/` | Tests, test vectors, version 2 samples |
 
-## License
+## Tests
 
-MIT License - See [LICENSE](LICENSE) file for details.
+Node.js 24.7 or later, no dependencies:
 
-Copyright (c) 2025 George A. Rauscher
-intelligent piXel GmbH
-International Institute of Forensic Expertise (IIFE)
+```
+node --test
+```
 
----
+`test/vectors-v3.json` contains fixed inputs and the expected SHA-256 hash of each output; any implementation of format v3 must reproduce these hashes. The round-trip outputs and all test vectors are also decrypted by a second, independent reader built only on `node:crypto`.
 
-## Bug Reports & Feature Requests
+## About
 
-Found a bug or have a feature request? Please open an issue on GitHub.
+> "Unencrypted data talks. I listened for 25 years. Make yours silent."
+>
+> George A. Rauscher, intelligent piXel GmbH
 
-**Security vulnerabilities:** Please report privately to george@rauscher.xyz
+Free to use, study, and share under the MIT License. Keep the credit, keep the link.
 
----
+## Third-party components
 
-## Privacy & GDPR
+| Component | License | Full text |
+|---|---|---|
+| [hash-wasm](https://github.com/Daninet/hash-wasm) 4.12.0 by Dani Biró | MIT | [`src/vendor/hash-wasm-LICENSE.txt`](src/vendor/hash-wasm-LICENSE.txt) |
+| Argon2 and BLAKE2b code inside hash-wasm, based on Go (The Go Authors) and the BLAKE2 reference implementation (Samuel Neves) | BSD-3-Clause, CC0 | [`src/vendor/hash-wasm-embedded-LICENSES.txt`](src/vendor/hash-wasm-embedded-LICENSES.txt) |
+| [Lucide](https://lucide.dev) icons, some derived from Feather by Cole Bemis | ISC, MIT | [`src/vendor/lucide-LICENSE.txt`](src/vendor/lucide-LICENSE.txt) |
 
-This application is GDPR compliant by design:
-- No personal data collection
-- No cookies
-- No tracking
-- No server-side processing
-- All data stays in your browser
-
-Lucide icons hosted locally (zero CDN, 100% privacy)
-
----
-
-## Legal
-
-**Responsible Party:**  
-George A. Rauscher  
-intelligent piXel GmbH
-International Institute of Forensic Expertise (IIFE)  
-Starnberg, Germany
-
-**Email:** george@rauscher.xyz
-
-For full legal information, see the Imprint and Privacy Policy pages.
-
----
-
-## Screenshots
-
-### Text Encryption
-![Text Encryption](docs/images/screenshot-encrypt.jpg)
-
-### File Encryption
-![File Encryption](docs/images/screenshot-file.jpg)
-
-### Contact Form
-![Contact Form](docs/images/screenshot-contact.jpg)
-
----
-
-## Disclaimer & Customization
-
-**IMPORTANT:** If you self-host this application, you MUST:
-
-1. **Replace all placeholder data** in `imprint.php` and `privacy.php` with your own legal information
-2. **Adapt the privacy policy** to your jurisdiction (EU GDPR, US CCPA, etc.)
-3. **Add your local data protection authority** contact information
-4. **Customize SMTP settings** for the contact form
-5. **Review and update all legal sections** according to your country's laws
-
-**Liability:** The original author (George A. Rauscher) is NOT liable for any legal issues arising from:
-- Incorrect or incomplete legal information in self-hosted versions
-- Non-compliance with local data protection laws
-- Misuse of the software
-- Failure to customize legal documents
-
-**Consultation:** We strongly recommend consulting a lawyer familiar with your jurisdiction's data protection and privacy laws before deploying this publicly.
-
----
-
-## Why Open Source?
-
-**Transparency** is essential for security tools. Open source allows:
-- Independent security audits
-- Community contributions
-- Trust through verification
-- Educational purposes
-
-**Cryptography should never be a black box.**
-
----
+All license texts, including this project's own, are also embedded at the end of `index.html`, so every copy carries them.
 
 ## Contributing
 
-Thank you for your interest! This project is maintained by George A. Rauscher.
+This project does not accept pull requests. Please report bugs as issues, and report security issues as described in [SECURITY.md](SECURITY.md).
 
-**Bug Reports:** Please open an issue on GitHub with details.
+## Security
 
-**Security Vulnerabilities:** Report privately to george@rauscher.xyz
+See [SECURITY.md](SECURITY.md). encryptor protects content, not metadata such as the approximate file size. It cannot protect a compromised device. Without the password, the data is lost; there is no recovery.
 
-**Pull Requests:** Currently not accepting external PRs to ensure security and code integrity. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+## License
 
----
+MIT License; see [LICENSE](LICENSE). If you build on encryptor, please keep the credit and link back to this repository.
 
-## Star This Project
+Copyright (c) 2026 George A. Rauscher, intelligent piXel GmbH, Germany.
 
-If you find this useful, please star the repository! It helps others discover this tool.
+## Disclaimer
 
----
+encryptor is provided free of charge and without warranty. Liability is excluded to the extent permitted by law; this does not limit liability for intent, gross negligence, or injury to life, body, or health. You are responsible for your passwords and for keeping backups of your data.
 
-**Made by forensic experts who understand security.**
+## Legal notice
 
-**No tracking. No data collection. No compromises.**
-
+Published by intelligent piXel GmbH, Starnberg, Germany. Legal notice (Impressum): [encryptor.app/legal-notice](https://encryptor.app/legal-notice/); in German: [encryptor.app/de/impressum](https://encryptor.app/de/impressum/).

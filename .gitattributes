@@ -1,33 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
-
-# Documents
-*.md text
-*.txt text
-
-# Scripts
-*.sh text eol=lf
-*.php text eol=lf
-
-# Web files
-*.html text eol=lf
-*.css text eol=lf
-*.js text eol=lf
-
-# Images
-*.jpg binary
-*.png binary
-*.gif binary
-*.ico binary
-*.webp binary
-
-# Archives
-*.zip binary
-*.tar.gz binary
-
-
-
-
-
-
-
+* text=auto eol=lf
+*.encrypted binary
+index.html linguist-generated=true
+src/vendor/** linguist-vendored=true
+test/vectors-v3.json linguist-generated=true

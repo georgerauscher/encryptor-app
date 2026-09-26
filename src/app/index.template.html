@@ -1,0 +1,199 @@
+<!doctype html>
+<!--
+  encryptor 3.0 · https://encryptor.app
+
+  George A. Rauscher:
+  "Unencrypted data talks. I listened for 25 years.
+   Make yours silent."
+
+  Copyright (c) 2026 George A. Rauscher, intelligent piXel GmbH
+  Free to use, study, and share under the MIT License.
+  Keep the credit, keep the link: https://github.com/georgerauscher/encryptor-app
+
+  Built from src/ with tools/build.py. Verify with SHA256SUMS.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="{{CSP}}">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<title>encryptor: encrypt files and text offline</title>
+<link rel="icon" href="{{FAVICON}}">
+<style>{{STYLE}}</style>
+</head>
+<body>
+{{SPRITE}}
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<noscript><p class="noscript" data-t="app.noscript">encryptor needs JavaScript.</p></noscript>
+
+<header class="bar glass">
+  <span class="brand"><span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg></span><span>encryptor</span><span class="chip">v3.0</span></span>
+  <span class="net" title="" data-tt="app.badge_net_tip"><svg class="icon icon-s" aria-hidden="true"><use href="#i-wifi-off"/></svg><span data-t="app.badge_net">Network blocked by design</span></span>
+  <div class="bar-tools">
+    <div class="lang-switch" data-active="en" role="group" data-ta="app.language">
+      <span class="lang-indicator" aria-hidden="true"></span>
+      <button type="button" class="lang-link" data-lang="en" lang="en" aria-pressed="true">EN</button>
+      <button type="button" class="lang-link" data-lang="de" lang="de" aria-pressed="false">DE</button>
+    </div>
+    <button type="button" class="icon-btn theme-btn" id="theme"><svg class="icon" aria-hidden="true"><use href="#i-sun-moon"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <span class="eyebrow"><svg class="icon icon-s" aria-hidden="true"><use href="#i-shield-check"/></svg><span data-t="app.eyebrow">Offline edition</span></span>
+    <h1><span data-t="app.h1a">Encrypt files and text.</span> <span class="grad" data-t="app.h1b">Without the internet.</span></h1>
+    <p class="lead" data-t="app.lead"></p>
+    <ul class="badges">
+      <li><svg class="icon icon-s" aria-hidden="true"><use href="#i-wifi-off"/></svg><span data-t="app.badge_offline">Works offline</span></li>
+      <li><svg class="icon icon-s" aria-hidden="true"><use href="#i-cpu"/></svg><span data-t="app.badge_local">Runs on this device</span></li>
+      <li><svg class="icon icon-s" aria-hidden="true"><use href="#i-key-round"/></svg><span>AES-256-GCM · Argon2id</span></li>
+    </ul>
+  </section>
+
+  <div class="window-wrap" id="wrap">
+  <section class="window glass">
+    <div class="window-top">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div class="seg" id="seg-mode" role="tablist">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button type="button" role="tab" data-mode="encrypt" aria-selected="true"><svg class="icon icon-s" aria-hidden="true"><use href="#i-lock"/></svg><span data-t="app.mode_encrypt">Encrypt</span></button>
+        <button type="button" role="tab" data-mode="decrypt" aria-selected="false"><svg class="icon icon-s" aria-hidden="true"><use href="#i-lock-open"/></svg><span data-t="app.mode_decrypt">Decrypt</span></button>
+      </div>
+      <div class="seg seg-small" id="seg-kind" role="tablist">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button type="button" role="tab" data-kind="file" aria-selected="true"><svg class="icon icon-s" aria-hidden="true"><use href="#i-file-lock"/></svg><span data-t="app.kind_file">File</span></button>
+        <button type="button" role="tab" data-kind="text" aria-selected="false"><svg class="icon icon-s" aria-hidden="true"><use href="#i-type"/></svg><span data-t="app.kind_text">Text</span></button>
+      </div>
+    </div>
+
+    <!-- Encrypt file -->
+    <div class="panel" id="p-ef" data-panel="encrypt-file">
+      <div class="stage" id="ef-stage">
+        <div class="drop" id="ef-drop" role="button" tabindex="0">
+          <div class="orb"><svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ef-ring" cx="60" cy="60" r="54"/></svg><svg class="icon orb-icon" aria-hidden="true"><use href="#i-upload"/></svg></div>
+          <strong data-t="encrypt_file.drop_title">Drop a file here</strong>
+          <span><span data-t="encrypt_file.drop_or">or</span> <span class="link" data-t="encrypt_file.choose">Choose file</span></span>
+          <span class="hint" data-t="encrypt_file.size_note"></span>
+        </div>
+        <input type="file" id="ef-file" class="vh" tabindex="-1">
+        <div class="file" id="ef-info" hidden><svg class="icon icon-l" aria-hidden="true"><use href="#i-file"/></svg><div class="grow"><div class="name" id="ef-name"></div><div class="size" id="ef-size"></div></div><button type="button" class="btn btn-ghost btn-s" id="ef-remove" data-t="encrypt_file.remove">Remove</button></div>
+        <div class="status" id="ef-status" hidden><span class="spinner" aria-hidden="true"></span><span id="ef-status-text"></span><span class="pct" id="ef-pct"></span></div>
+        <div class="actions"><button type="button" class="btn btn-primary" id="ef-go" disabled><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span data-t="encrypt_file.button">Encrypt</span></button><button type="button" class="btn btn-ghost" id="ef-cancel" hidden data-t="encrypt_file.progress.cancel">Cancel</button></div>
+        <p class="note-local"><svg class="icon icon-s" aria-hidden="true"><use href="#i-shield-check"/></svg><span data-t="encrypt_file.local_note"></span></p>
+      </div>
+      <div class="result" id="ef-result" hidden>
+        <div class="done"><span class="done-mark"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><h2 data-t="encrypt_file.result.title">Done.</h2></div>
+        <div class="row"><div class="grow"><div class="label" data-t="encrypt_file.result.filename_label">File name</div><code class="mono" id="ef-out"></code></div><button type="button" class="btn btn-primary" id="ef-save"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-t="encrypt_file.result.save">Save</span></button></div>
+        <p class="hint" data-t="encrypt_file.result.filename_note"></p>
+        <div class="secret-block" data-secret="ef"></div>
+        <div class="actions"><button type="button" class="btn btn-ghost" id="ef-again" data-t="encrypt_file.result.encrypt_another">Encrypt another</button></div>
+      </div>
+    </div>
+
+    <!-- Encrypt text -->
+    <div class="panel" id="p-et" data-panel="encrypt-text" hidden>
+      <div class="stage" id="et-stage">
+        <label class="label" for="et-msg" data-t="encrypt_text.input_label">Your text</label>
+        <textarea class="input" id="et-msg" rows="7" data-tp="encrypt_text.input_placeholder" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false"></textarea>
+        <div class="meta-row"><span class="hint" id="et-count"></span></div>
+        <div class="status" id="et-status" hidden><span class="spinner" aria-hidden="true"></span><span data-t="app.kdf"></span></div>
+        <div class="actions"><button type="button" class="btn btn-primary" id="et-go"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span data-t="encrypt_text.button">Encrypt</span></button></div>
+        <p class="note-local"><svg class="icon icon-s" aria-hidden="true"><use href="#i-shield-check"/></svg><span data-t="encrypt_text.local_note"></span></p>
+      </div>
+      <div class="result" id="et-result" hidden>
+        <div class="done"><span class="done-mark"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><h2 data-t="encrypt_text.result.title">Done.</h2></div>
+        <div class="label-row"><span class="label" data-t="encrypt_text.result.ciphertext_label">Encrypted text</span><button type="button" class="btn btn-ghost btn-s" id="et-copy"><svg class="icon icon-s" aria-hidden="true"><use href="#i-copy"/></svg><span class="label-text" data-t="encrypt_text.result.copy_ciphertext">Copy</span></button></div>
+        <textarea class="input mono" id="et-cipher" rows="5" readonly spellcheck="false" autocomplete="off" data-gramm="false" data-lt-active="false"></textarea>
+        <div class="secret-block" data-secret="et"></div>
+        <div class="actions"><button type="button" class="btn btn-ghost" id="et-again" data-t="encrypt_text.result.encrypt_another">Encrypt another</button></div>
+      </div>
+    </div>
+
+    <!-- Decrypt file -->
+    <div class="panel" id="p-df" data-panel="decrypt-file" hidden>
+      <div class="stage" id="df-stage">
+        <div class="drop" id="df-drop" role="button" tabindex="0">
+          <div class="orb"><svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="df-ring" cx="60" cy="60" r="54"/></svg><svg class="icon orb-icon" aria-hidden="true"><use href="#i-file-key"/></svg></div>
+          <strong data-t="decrypt_file.drop_title">Drop a .encrypted file here</strong>
+          <span><span data-t="decrypt_file.drop_or">or</span> <span class="link" data-t="decrypt_file.choose">Choose file</span></span>
+          <span class="hint" data-t="decrypt_file.formats_note"></span>
+        </div>
+        <input type="file" id="df-file" class="vh" tabindex="-1">
+        <div class="file" id="df-info" hidden><svg class="icon icon-l" aria-hidden="true"><use href="#i-file-lock"/></svg><div class="grow"><div class="name" id="df-name"></div><div class="size" id="df-size"></div></div><button type="button" class="btn btn-ghost btn-s" id="df-remove" data-t="decrypt_file.remove">Remove</button></div>
+        <div class="pw-field" data-pw="df"></div>
+        <div class="status" id="df-status" hidden><span class="spinner" aria-hidden="true"></span><span id="df-status-text"></span><span class="pct" id="df-pct"></span></div>
+        <div class="actions"><button type="button" class="btn btn-primary" id="df-go" disabled><svg class="icon" aria-hidden="true"><use href="#i-lock-open"/></svg><span data-t="decrypt_file.button">Decrypt</span></button><button type="button" class="btn btn-ghost" id="df-cancel" hidden data-t="decrypt_file.progress.cancel">Cancel</button></div>
+      </div>
+      <div class="result" id="df-result" hidden>
+        <div class="done"><span class="done-mark"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><h2 data-t="decrypt_file.result.title">Done.</h2></div>
+        <p class="warn" id="df-w-v2" hidden data-t="decrypt_file.warnings.v2"></p>
+        <p class="warn" id="df-w-inc" hidden data-t="decrypt_file.warnings.v2_incomplete"></p>
+        <p class="warn" id="df-w-ren" hidden data-t="decrypt_file.warnings.name_cleaned"></p>
+        <p class="warn warn-strong" id="df-w-exe" hidden data-t="decrypt_file.warnings.executable"></p>
+        <div class="row"><div class="grow"><div class="label" data-t="decrypt_file.result.filename_label">Original name</div><code class="mono" id="df-out"></code></div><button type="button" class="btn btn-primary" id="df-save"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span data-t="decrypt_file.result.save">Save file</span></button></div>
+        <div class="actions"><button type="button" class="btn btn-ghost" id="df-again" data-t="decrypt_file.result.decrypt_another">Decrypt another</button></div>
+      </div>
+    </div>
+
+    <!-- Decrypt text -->
+    <div class="panel" id="p-dt" data-panel="decrypt-text" hidden>
+      <div class="stage" id="dt-stage">
+        <label class="label" for="dt-cipher" data-t="decrypt_text.input_label">Encrypted text</label>
+        <textarea class="input mono" id="dt-cipher" rows="5" data-tp="decrypt_text.input_placeholder" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false"></textarea>
+        <div class="pw-field" data-pw="dt"></div>
+        <div class="status" id="dt-status" hidden><span class="spinner" aria-hidden="true"></span><span data-t="app.kdf"></span></div>
+        <div class="actions"><button type="button" class="btn btn-primary" id="dt-go"><svg class="icon" aria-hidden="true"><use href="#i-lock-open"/></svg><span data-t="decrypt_text.button">Decrypt</span></button></div>
+      </div>
+      <div class="result" id="dt-result" hidden>
+        <div class="done"><span class="done-mark"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><h2 data-t="decrypt_text.result.title">Done.</h2></div>
+        <p class="warn" id="dt-w-v2" hidden data-t="decrypt_text.notice_v2"></p>
+        <div class="label-row"><span class="label" data-t="decrypt_text.result.plaintext_label">Decrypted text</span><button type="button" class="btn btn-ghost btn-s" id="dt-copy"><svg class="icon icon-s" aria-hidden="true"><use href="#i-copy"/></svg><span class="label-text" data-t="decrypt_text.result.copy">Copy</span></button></div>
+        <textarea class="input" id="dt-plain" rows="7" readonly spellcheck="false" autocomplete="off" data-gramm="false" data-lt-active="false"></textarea>
+        <p class="hint" data-t="decrypt_text.result.after_note"></p>
+        <div class="actions"><button type="button" class="btn btn-ghost" id="dt-again" data-t="decrypt_text.result.clear">Clear</button></div>
+      </div>
+    </div>
+
+    <div class="msg" id="msg" role="status" hidden></div>
+  </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <span><span data-t="app.footer_powered">Powered by</span> <a href="https://encryptor.app" rel="noopener">encryptor.app</a></span>
+  <span><span data-t="app.footer_built">Built by</span> <a href="https://rauscher.xyz" rel="noopener">George A. Rauscher</a></span>
+  <a href="https://github.com/georgerauscher/encryptor-app" rel="noopener">GitHub</a>
+  <span class="verify" data-t="app.footer_verify"></span>
+</footer>
+
+<template id="tpl-secret">
+  <div class="secret">
+    <div class="label-row"><span class="label" data-t="{{P}}.result.password_label">Password</span><button type="button" class="btn btn-ghost btn-s" data-copy-pw><svg class="icon icon-s" aria-hidden="true"><use href="#i-copy"/></svg><span class="label-text" data-t="{{P}}.result.copy_password">Copy password</span></button></div>
+    <div class="chips" data-chips translate="no"></div>
+    <div class="strength"><span class="meter" aria-hidden="true"><i></i></span><span><strong><span data-t="{{P}}.result.strength_label"></span>: <span data-t="{{P}}.result.strength_value"></span></strong> · <span data-t="{{P}}.result.crack_label"></span>: <span data-t="{{P}}.result.crack_value"></span></span></div>
+    <ul class="notes" data-notes="{{P}}.result.password_note"></ul>
+  </div>
+</template>
+
+<template id="tpl-pw">
+  <label class="label" data-t="{{P}}.password_label">Password</label>
+  <div class="pw-row">
+    <input class="input mono pw-input" type="password" data-tp="{{P}}.password_placeholder" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false">
+    <button type="button" class="icon-btn pw-toggle" data-ta="{{P}}.show_password" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></button>
+  </div>
+  <div class="pw-check" aria-live="polite"><span class="pw-state"></span><span class="pw-text" data-t="{{P}}.password_hint"></span></div>
+</template>
+
+<script type="application/json" id="i18n">{{I18N}}</script>
+<script>{{VENDOR}}</script>
+<script>{{APP}}</script>
+<!--
+License notices
+
+{{NOTICES}}
+-->
+</body>
+</html>

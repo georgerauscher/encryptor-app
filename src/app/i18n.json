@@ -1,0 +1,476 @@
+{
+ "en": {
+  "encrypt_text": {
+   "h1": "Encrypt text",
+   "lead": "Type or paste your text. encryptor encrypts it on this device and generates the password.",
+   "input_label": "Your text",
+   "input_placeholder": "Type or paste the text you want to encrypt",
+   "counter": "{count} characters",
+   "counter_one": "1 character",
+   "local_note": "Encryption runs in your browser. Nothing is uploaded.",
+   "button": "Encrypt",
+   "working": "Encrypting…",
+   "result": {
+    "title": "Done. Your text is encrypted.",
+    "ciphertext_label": "Encrypted text",
+    "ciphertext_hint": "Starts with ENCR3. Send it any way you like.",
+    "copy_ciphertext": "Copy ciphertext",
+    "password_label": "Password",
+    "password_hint": "26 characters plus 2 check characters, shown in groups of four.",
+    "copy_password": "Copy password",
+    "password_note": [
+     "Send the password over a different channel than the text, for example, by phone.",
+     "encryptor does not store the password.",
+     "Without the password, the data is lost. There is no recovery."
+    ],
+    "strength_label": "Strength",
+    "strength_value": "130 bits",
+    "crack_label": "Time to crack",
+    "crack_value": "about 7 × 10²¹ years with 1 million RTX 5090 GPUs",
+    "crack_link": "How this is calculated",
+    "next_title": "Next steps",
+    "next_steps": [
+     "Copy the encrypted text and send it, for example, by email or messaging app.",
+     "Send the password over a different channel.",
+     "The recipient opens encryptor.app, chooses Decrypt text, and pastes both."
+    ],
+    "encrypt_another": "Encrypt another"
+   },
+   "copied": "Copied",
+   "copy_failed": "Couldn't copy. Select the text and copy it manually.",
+   "errors": {
+    "empty": "Enter some text first.",
+    "failed": "Encryption failed. Reload the page and try again."
+   }
+  },
+  "decrypt_text": {
+   "h1": "Decrypt text",
+   "lead": "Paste the encrypted text and enter the password you received.",
+   "input_label": "Encrypted text",
+   "input_placeholder": "Paste text that starts with ENCR3. or text from version 2",
+   "password_label": "Password",
+   "password_placeholder": "The password you received separately",
+   "password_hint": "Version 3 passwords contain 2 check characters. encryptor uses them to detect typing errors.",
+   "show_password": "Show password",
+   "hide_password": "Hide password",
+   "local_note": "Decryption runs in your browser. Nothing is uploaded.",
+   "button": "Decrypt",
+   "working": "Decrypting…",
+   "result": {
+    "title": "Done. Your text is decrypted.",
+    "plaintext_label": "Decrypted text",
+    "copy": "Copy text",
+    "clear": "Clear",
+    "after_note": "When you're done, click Clear or close this tab. If you copied the text, it stays in your clipboard."
+   },
+   "notice_v2": "This text uses the older version 2 format. It decrypted correctly. New texts use version 3.",
+   "copied": "Copied",
+   "copy_failed": "Couldn't copy. Select the text and copy it manually.",
+   "errors": {
+    "empty_text": "Paste the encrypted text first.",
+    "empty_password": "Enter the password.",
+    "wrong_or_damaged": "Decryption failed. Either the password is wrong, or the text was changed or not copied completely.",
+    "unknown_format": "encryptor can't read this text. Make sure you copied all of it, from the first to the last character.",
+    "password_typo": "The password contains a typing error. Check each character and try again."
+   }
+  },
+  "encrypt_file": {
+   "h1": "Encrypt a file",
+   "lead": "Choose a file. encryptor encrypts it on this device, including its name and type, and generates the password.",
+   "drop_title": "Drop a file here",
+   "drop_or": "or",
+   "choose": "Choose file",
+   "remove": "Remove",
+   "selected": "{name}, {size}",
+   "size_note": "Any size in Chrome and Edge. Up to 2 GB in Safari and Firefox.",
+   "local_note": "Your file stays on this device. Nothing is uploaded.",
+   "button": "Encrypt",
+   "progress": {
+    "label": "Encrypting…",
+    "percent": "{percent}%",
+    "remaining": "About {time} left",
+    "estimating": "Estimating time left…",
+    "keep_open": "Keep this tab open until encryption is complete.",
+    "cancel": "Cancel"
+   },
+   "result": {
+    "title": "Done. Your file is encrypted.",
+    "filename_label": "File name",
+    "filename_pattern": "encryptor-YYYY-MM-DD.encrypted",
+    "filename_note": "The file name reveals nothing about the content. The original name is stored encrypted inside the file.",
+    "save": "Save encrypted file",
+    "password_label": "Password",
+    "password_hint": "26 characters plus 2 check characters, shown in groups of four.",
+    "copy_password": "Copy password",
+    "password_note": [
+     "Send the password over a different channel than the file, for example, by phone.",
+     "encryptor does not store the password.",
+     "Without the password, the data is lost. There is no recovery."
+    ],
+    "strength_label": "Strength",
+    "strength_value": "130 bits",
+    "crack_label": "Time to crack",
+    "crack_value": "about 7 × 10²¹ years with 1 million RTX 5090 GPUs",
+    "crack_link": "How this is calculated",
+    "encrypt_another": "Encrypt another"
+   },
+   "copied": "Copied",
+   "copy_failed": "Couldn't copy. Select the password and copy it manually.",
+   "errors": {
+    "no_file": "Choose a file first.",
+    "too_large": "This file is too large for this browser. Safari and Firefox handle files up to 2 GB. For larger files, use Chrome or Edge.",
+    "cancelled": "Encryption canceled.",
+    "storage_full": "Not enough storage space on this device. Free up space and try again.",
+    "failed": "Encryption failed. Reload the page and try again."
+   }
+  },
+  "decrypt_file": {
+   "h1": "Decrypt a file",
+   "lead": "Choose a .encrypted file and enter the password you received.",
+   "drop_title": "Drop a .encrypted file here",
+   "drop_or": "or",
+   "choose": "Choose file",
+   "remove": "Remove",
+   "selected": "{name}, {size}",
+   "formats_note": "Works with .encrypted files from version 3 and version 2.",
+   "size_note": "Any size in Chrome and Edge. Up to 2 GB in Safari and Firefox.",
+   "local_note": "Your file stays on this device. Nothing is uploaded.",
+   "password_label": "Password",
+   "password_placeholder": "The password you received separately",
+   "password_hint": "Version 3 passwords contain 2 check characters. encryptor uses them to detect typing errors.",
+   "show_password": "Show password",
+   "hide_password": "Hide password",
+   "button": "Decrypt",
+   "progress": {
+    "label": "Decrypting…",
+    "percent": "{percent}%",
+    "remaining": "About {time} left",
+    "estimating": "Estimating time left…",
+    "keep_open": "Keep this tab open until decryption is complete.",
+    "cancel": "Cancel"
+   },
+   "result": {
+    "title": "Done. Your file is decrypted.",
+    "filename_label": "Original name",
+    "save": "Save file",
+    "decrypt_another": "Decrypt another"
+   },
+   "warnings": {
+    "name_cleaned": "The file name was cleaned up. Invisible or misleading characters were removed.",
+    "executable": "This file can run programs. Open it only if you trust the sender.",
+    "v2": "This file uses the older version 2 format. It decrypted correctly. New files use version 3.",
+    "v2_incomplete": "This version 2 file is incomplete. It may have been cut off."
+   },
+   "errors": {
+    "no_file": "Choose a .encrypted file first.",
+    "empty_password": "Enter the password.",
+    "wrong_or_damaged": "Decryption failed. Either the password is wrong, or the file was changed or is incomplete.",
+    "unknown_format": "encryptor can't read this file. Choose a .encrypted file created by encryptor.",
+    "password_typo": "The password contains a typing error. Check each character and try again.",
+    "too_large": "This file is too large for this browser. Safari and Firefox handle files up to 2 GB. For larger files, use Chrome or Edge.",
+    "cancelled": "Decryption canceled.",
+    "storage_full": "Not enough storage space on this device. Free up space and try again.",
+    "failed": "Decryption failed. Reload the page and try again."
+   }
+  },
+  "common_ui": {
+   "copy": "Copy",
+   "copied": "Copied",
+   "copy_failed": "Couldn't copy. Select the text and copy it manually.",
+   "show_password": "Show password",
+   "hide_password": "Hide password",
+   "dismiss": "Dismiss",
+   "close": "Close"
+  },
+  "errors": {
+   "generic": "Something went wrong. Reload the page and try again.",
+   "empty": "Please fill in all fields.",
+   "unknown": "encryptor can't read this. Check that it is complete.",
+   "auth": "Decryption failed. Either the password is wrong, or the data was changed or is incomplete.",
+   "corrupt": "Decryption failed. Either the password is wrong, or the data was changed or is incomplete.",
+   "unsupported": "This was created by a newer version of encryptor, or it is damaged. Download the latest index.html from github.com/georgerauscher/encryptor-app.",
+   "no_crypto": "This browser does not allow encryption here. Open index.html in a current version of Chrome, Edge, Firefox, or Safari.",
+   "typo": "The password contains a typing error. Check each character and try again.",
+   "too_big": "This file is too large for this browser. Use Chrome or Edge for files over 2 GB.",
+   "storage": "Not enough memory or disk space.",
+   "argon2-unavailable": "Your browser blocked a required component. Reload the page and try again.",
+   "clipboard": "Couldn't copy. Select the text and copy it manually."
+  },
+  "units": [
+   "B",
+   "KB",
+   "MB",
+   "GB",
+   "TB"
+  ],
+  "eta_min": "about {m} min {s} s left",
+  "eta_sec": "about {s} s left",
+  "cancelled": "Canceled.",
+  "app": {
+   "title": "encryptor: encrypt files and text offline",
+   "eyebrow": "Offline edition · v3.0",
+   "h1a": "Encrypt files and text.",
+   "h1b": "Without the internet.",
+   "lead": "This single file is the whole tool. AES-256-GCM, Argon2id, and a generated 130-bit password. Nothing leaves this device.",
+   "badge_net": "Network blocked by design",
+   "badge_net_tip": "The page's security policy allows no connections at all.",
+   "badge_offline": "Works offline",
+   "badge_local": "Runs on this device",
+   "mode_encrypt": "Encrypt",
+   "mode_decrypt": "Decrypt",
+   "kind_file": "File",
+   "kind_text": "Text",
+   "kdf": "Deriving the key with Argon2id (64 MiB)…",
+   "pw_valid": "Check characters match.",
+   "pw_typo": "A character looks wrong. Check each group.",
+   "pw_free": "Passwords from version 2 are used exactly as typed.",
+   "theme": {
+    "system": "Color theme: system",
+    "light": "Color theme: light",
+    "dark": "Color theme: dark"
+   },
+   "language": "Choose language",
+   "footer_powered": "Powered by",
+   "footer_built": "Built by",
+   "footer_verify": "Verify this file: compare its SHA-256 with SHA256SUMS on GitHub.",
+   "noscript": "encryptor needs JavaScript. Nothing is sent anywhere; everything runs in this file."
+  }
+ },
+ "de": {
+  "encrypt_text": {
+   "h1": "Text verschlüsseln",
+   "lead": "Geben Sie Ihren Text ein oder fügen Sie ihn ein. encryptor verschlüsselt ihn auf diesem Gerät und erzeugt das Passwort.",
+   "input_label": "Ihr Text",
+   "input_placeholder": "Text eingeben oder einfügen",
+   "counter": "{count} Zeichen",
+   "counter_one": "1 Zeichen",
+   "local_note": "Die Verschlüsselung läuft in Ihrem Browser. Nichts wird hochgeladen.",
+   "button": "Verschlüsseln",
+   "working": "Wird verschlüsselt…",
+   "result": {
+    "title": "Fertig. Ihr Text ist verschlüsselt.",
+    "ciphertext_label": "Verschlüsselter Text",
+    "ciphertext_hint": "Beginnt mit ENCR3. Verschicken Sie ihn auf beliebigem Weg.",
+    "copy_ciphertext": "Geheimtext kopieren",
+    "password_label": "Passwort",
+    "password_hint": "26 Zeichen plus 2 Prüfzeichen, in Vierergruppen angezeigt.",
+    "copy_password": "Passwort kopieren",
+    "password_note": [
+     "Schicken Sie das Passwort auf einem anderen Weg als den Text, etwa per Telefon.",
+     "encryptor speichert das Passwort nicht.",
+     "Ohne Passwort sind die Daten verloren. Eine Wiederherstellung gibt es nicht."
+    ],
+    "strength_label": "Stärke",
+    "strength_value": "130 Bit",
+    "crack_label": "Knackzeit",
+    "crack_value": "rund 7 × 10²¹ Jahre mit 1 Million GPUs vom Typ RTX 5090",
+    "crack_link": "So wird gerechnet",
+    "next_title": "So geht es weiter",
+    "next_steps": [
+     "Kopieren Sie den verschlüsselten Text und verschicken Sie ihn, etwa per E-Mail oder Messenger.",
+     "Teilen Sie das Passwort auf einem anderen Weg mit.",
+     "Der Empfänger öffnet encryptor.app, wählt Text entschlüsseln und fügt beides ein."
+    ],
+    "encrypt_another": "Weiteren Text verschlüsseln"
+   },
+   "copied": "Kopiert",
+   "copy_failed": "Kopieren hat nicht geklappt. Bitte markieren Sie den Text und kopieren Sie ihn von Hand.",
+   "errors": {
+    "empty": "Bitte geben Sie zuerst einen Text ein.",
+    "failed": "Die Verschlüsselung ist fehlgeschlagen. Bitte laden Sie die Seite neu und versuchen Sie es noch einmal."
+   }
+  },
+  "decrypt_text": {
+   "h1": "Text entschlüsseln",
+   "lead": "Fügen Sie den verschlüsselten Text ein und geben Sie das Passwort ein, das Sie erhalten haben.",
+   "input_label": "Verschlüsselter Text",
+   "input_placeholder": "Text einfügen, der mit ENCR3. beginnt, oder Text aus Version 2",
+   "password_label": "Passwort",
+   "password_placeholder": "Das Passwort, das Sie separat erhalten haben",
+   "password_hint": "Passwörter aus Version 3 enthalten 2 Prüfzeichen. Daran erkennt encryptor Tippfehler.",
+   "show_password": "Passwort anzeigen",
+   "hide_password": "Passwort verbergen",
+   "local_note": "Die Entschlüsselung läuft in Ihrem Browser. Nichts wird hochgeladen.",
+   "button": "Entschlüsseln",
+   "working": "Wird entschlüsselt…",
+   "result": {
+    "title": "Fertig. Ihr Text ist entschlüsselt.",
+    "plaintext_label": "Entschlüsselter Text",
+    "copy": "Text kopieren",
+    "clear": "Leeren",
+    "after_note": "Wenn Sie fertig sind, klicken Sie auf Leeren oder schließen Sie diesen Tab. Haben Sie den Text kopiert, bleibt er in der Zwischenablage."
+   },
+   "notice_v2": "Dieser Text nutzt das ältere Format Version 2. Er wurde korrekt entschlüsselt. Neue Texte nutzen Version 3.",
+   "copied": "Kopiert",
+   "copy_failed": "Kopieren hat nicht geklappt. Bitte markieren Sie den Text und kopieren Sie ihn von Hand.",
+   "errors": {
+    "empty_text": "Bitte fügen Sie zuerst den verschlüsselten Text ein.",
+    "empty_password": "Bitte geben Sie das Passwort ein.",
+    "wrong_or_damaged": "Die Entschlüsselung ist fehlgeschlagen. Entweder stimmt das Passwort nicht, oder der Text wurde verändert oder nicht vollständig kopiert.",
+    "unknown_format": "encryptor kann diesen Text nicht lesen. Bitte kopieren Sie den ganzen Text, vom ersten bis zum letzten Zeichen.",
+    "password_typo": "Das Passwort enthält einen Tippfehler. Bitte prüfen Sie jedes Zeichen und versuchen Sie es noch einmal."
+   }
+  },
+  "encrypt_file": {
+   "h1": "Datei verschlüsseln",
+   "lead": "Wählen Sie eine Datei. encryptor verschlüsselt sie auf diesem Gerät, samt Name und Typ, und erzeugt das Passwort.",
+   "drop_title": "Datei hierher ziehen",
+   "drop_or": "oder",
+   "choose": "Datei wählen",
+   "remove": "Entfernen",
+   "selected": "{name}, {size}",
+   "size_note": "In Chrome und Edge jede Größe. In Safari und Firefox bis 2 GB.",
+   "local_note": "Ihre Datei bleibt auf diesem Gerät. Nichts wird hochgeladen.",
+   "button": "Verschlüsseln",
+   "progress": {
+    "label": "Wird verschlüsselt…",
+    "percent": "{percent} %",
+    "remaining": "Noch etwa {time}",
+    "estimating": "Restzeit wird berechnet…",
+    "keep_open": "Lassen Sie diesen Tab offen, bis die Verschlüsselung abgeschlossen ist.",
+    "cancel": "Abbrechen"
+   },
+   "result": {
+    "title": "Fertig. Ihre Datei ist verschlüsselt.",
+    "filename_label": "Dateiname",
+    "filename_pattern": "encryptor-JJJJ-MM-TT.encrypted",
+    "filename_note": "Der Dateiname verrät nichts über den Inhalt. Der Originalname steckt verschlüsselt in der Datei.",
+    "save": "Verschlüsselte Datei sichern",
+    "password_label": "Passwort",
+    "password_hint": "26 Zeichen plus 2 Prüfzeichen, in Vierergruppen angezeigt.",
+    "copy_password": "Passwort kopieren",
+    "password_note": [
+     "Schicken Sie das Passwort auf einem anderen Weg als die Datei, etwa per Telefon.",
+     "encryptor speichert das Passwort nicht.",
+     "Ohne Passwort sind die Daten verloren. Eine Wiederherstellung gibt es nicht."
+    ],
+    "strength_label": "Stärke",
+    "strength_value": "130 Bit",
+    "crack_label": "Knackzeit",
+    "crack_value": "rund 7 × 10²¹ Jahre mit 1 Million GPUs vom Typ RTX 5090",
+    "crack_link": "So wird gerechnet",
+    "encrypt_another": "Weitere Datei verschlüsseln"
+   },
+   "copied": "Kopiert",
+   "copy_failed": "Kopieren hat nicht geklappt. Bitte markieren Sie das Passwort und kopieren Sie es von Hand.",
+   "errors": {
+    "no_file": "Bitte wählen Sie zuerst eine Datei.",
+    "too_large": "Diese Datei ist für diesen Browser zu groß. Safari und Firefox verarbeiten Dateien bis 2 GB. Für größere Dateien nutzen Sie Chrome oder Edge.",
+    "cancelled": "Verschlüsselung abgebrochen.",
+    "storage_full": "Auf diesem Gerät ist nicht genug Speicherplatz frei. Bitte schaffen Sie Platz und versuchen Sie es noch einmal.",
+    "failed": "Die Verschlüsselung ist fehlgeschlagen. Bitte laden Sie die Seite neu und versuchen Sie es noch einmal."
+   }
+  },
+  "decrypt_file": {
+   "h1": "Datei entschlüsseln",
+   "lead": "Wählen Sie eine .encrypted-Datei und geben Sie das Passwort ein, das Sie erhalten haben.",
+   "drop_title": ".encrypted-Datei hierher ziehen",
+   "drop_or": "oder",
+   "choose": "Datei wählen",
+   "remove": "Entfernen",
+   "selected": "{name}, {size}",
+   "formats_note": "Für .encrypted-Dateien aus Version 3 und Version 2.",
+   "size_note": "In Chrome und Edge jede Größe. In Safari und Firefox bis 2 GB.",
+   "local_note": "Ihre Datei bleibt auf diesem Gerät. Nichts wird hochgeladen.",
+   "password_label": "Passwort",
+   "password_placeholder": "Das Passwort, das Sie separat erhalten haben",
+   "password_hint": "Passwörter aus Version 3 enthalten 2 Prüfzeichen. Daran erkennt encryptor Tippfehler.",
+   "show_password": "Passwort anzeigen",
+   "hide_password": "Passwort verbergen",
+   "button": "Entschlüsseln",
+   "progress": {
+    "label": "Wird entschlüsselt…",
+    "percent": "{percent} %",
+    "remaining": "Noch etwa {time}",
+    "estimating": "Restzeit wird berechnet…",
+    "keep_open": "Lassen Sie diesen Tab offen, bis die Entschlüsselung abgeschlossen ist.",
+    "cancel": "Abbrechen"
+   },
+   "result": {
+    "title": "Fertig. Ihre Datei ist entschlüsselt.",
+    "filename_label": "Originalname",
+    "save": "Datei sichern",
+    "decrypt_another": "Weitere Datei entschlüsseln"
+   },
+   "warnings": {
+    "name_cleaned": "Der Dateiname wurde bereinigt. Unsichtbare oder irreführende Zeichen wurden entfernt.",
+    "executable": "Diese Datei kann Programme ausführen. Öffnen Sie sie nur, wenn Sie dem Absender vertrauen.",
+    "v2": "Diese Datei nutzt das ältere Format Version 2. Sie wurde korrekt entschlüsselt. Neue Dateien nutzen Version 3.",
+    "v2_incomplete": "Diese Datei aus Version 2 ist unvollständig. Möglicherweise wurde sie abgeschnitten."
+   },
+   "errors": {
+    "no_file": "Bitte wählen Sie zuerst eine .encrypted-Datei.",
+    "empty_password": "Bitte geben Sie das Passwort ein.",
+    "wrong_or_damaged": "Die Entschlüsselung ist fehlgeschlagen. Entweder stimmt das Passwort nicht, oder die Datei wurde verändert oder ist unvollständig.",
+    "unknown_format": "encryptor kann diese Datei nicht lesen. Bitte wählen Sie eine .encrypted-Datei, die mit encryptor erstellt wurde.",
+    "password_typo": "Das Passwort enthält einen Tippfehler. Bitte prüfen Sie jedes Zeichen und versuchen Sie es noch einmal.",
+    "too_large": "Diese Datei ist für diesen Browser zu groß. Safari und Firefox verarbeiten Dateien bis 2 GB. Für größere Dateien nutzen Sie Chrome oder Edge.",
+    "cancelled": "Entschlüsselung abgebrochen.",
+    "storage_full": "Auf diesem Gerät ist nicht genug Speicherplatz frei. Bitte schaffen Sie Platz und versuchen Sie es noch einmal.",
+    "failed": "Die Entschlüsselung ist fehlgeschlagen. Bitte laden Sie die Seite neu und versuchen Sie es noch einmal."
+   }
+  },
+  "common_ui": {
+   "copy": "Kopieren",
+   "copied": "Kopiert",
+   "copy_failed": "Kopieren hat nicht geklappt. Bitte markieren Sie den Text und kopieren Sie ihn von Hand.",
+   "show_password": "Passwort anzeigen",
+   "hide_password": "Passwort verbergen",
+   "dismiss": "Schließen",
+   "close": "Schließen"
+  },
+  "errors": {
+   "generic": "Etwas ist schiefgegangen. Laden Sie die Seite neu und versuchen Sie es erneut.",
+   "empty": "Bitte füllen Sie alle Felder aus.",
+   "unknown": "encryptor kann das nicht lesen. Prüfen Sie, ob es vollständig ist.",
+   "auth": "Entschlüsseln fehlgeschlagen. Entweder ist das Passwort falsch, oder die Daten wurden verändert oder sind unvollständig.",
+   "corrupt": "Entschlüsseln fehlgeschlagen. Entweder ist das Passwort falsch, oder die Daten wurden verändert oder sind unvollständig.",
+   "unsupported": "Das wurde mit einer neueren Version von encryptor erstellt oder ist beschädigt. Laden Sie die aktuelle index.html von github.com/georgerauscher/encryptor-app.",
+   "no_crypto": "Dieser Browser erlaubt hier keine Verschlüsselung. Öffnen Sie index.html in einer aktuellen Version von Chrome, Edge, Firefox oder Safari.",
+   "typo": "Das Passwort enthält einen Tippfehler. Prüfen Sie jedes Zeichen und versuchen Sie es erneut.",
+   "too_big": "Diese Datei ist zu groß für diesen Browser. Für Dateien über 2 GB nutzen Sie Chrome oder Edge.",
+   "storage": "Nicht genug Arbeitsspeicher oder Speicherplatz.",
+   "argon2-unavailable": "Ihr Browser hat eine nötige Komponente blockiert. Laden Sie die Seite neu und versuchen Sie es erneut.",
+   "clipboard": "Kopieren nicht möglich. Markieren Sie den Text und kopieren Sie ihn von Hand."
+  },
+  "units": [
+   "B",
+   "KB",
+   "MB",
+   "GB",
+   "TB"
+  ],
+  "eta_min": "noch etwa {m} min {s} s",
+  "eta_sec": "noch etwa {s} s",
+  "cancelled": "Abgebrochen.",
+  "app": {
+   "title": "encryptor: Dateien und Texte offline verschlüsseln",
+   "eyebrow": "Offline-Ausgabe · v3.0",
+   "h1a": "Dateien und Texte verschlüsseln.",
+   "h1b": "Ohne Internet.",
+   "lead": "Diese eine Datei ist das ganze Werkzeug. AES-256-GCM, Argon2id und ein generiertes 130-Bit-Passwort. Nichts verlässt dieses Gerät.",
+   "badge_net": "Netzwerk bewusst gesperrt",
+   "badge_net_tip": "Die Sicherheitsrichtlinie der Seite erlaubt keinerlei Verbindungen.",
+   "badge_offline": "Läuft offline",
+   "badge_local": "Läuft auf diesem Gerät",
+   "mode_encrypt": "Verschlüsseln",
+   "mode_decrypt": "Entschlüsseln",
+   "kind_file": "Datei",
+   "kind_text": "Text",
+   "kdf": "Schlüssel wird mit Argon2id abgeleitet (64 MiB)…",
+   "pw_valid": "Prüfzeichen stimmen.",
+   "pw_typo": "Ein Zeichen scheint falsch. Prüfen Sie jede Gruppe.",
+   "pw_free": "Passwörter aus Version 2 werden genau so verwendet, wie Sie sie eingeben.",
+   "theme": {
+    "system": "Farbschema: System",
+    "light": "Farbschema: hell",
+    "dark": "Farbschema: dunkel"
+   },
+   "language": "Sprache wählen",
+   "footer_powered": "Powered by",
+   "footer_built": "Built by",
+   "footer_verify": "Datei prüfen: SHA-256 mit SHA256SUMS auf GitHub vergleichen.",
+   "noscript": "encryptor braucht JavaScript. Es wird nichts gesendet, alles läuft in dieser Datei."
+  }
+ }
+}

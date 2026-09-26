@@ -1,62 +1,20 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Reporting a vulnerability
 
-We currently support the latest release only.
+Please report security issues privately through the contact form at https://encryptor.app/contact/ or by email to george@rauscher.xyz. Do not open a public issue for a vulnerability.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 2.2.x   | :white_check_mark: |
-| < 2.2   | :x:                |
+Include the affected file, a description, and steps to reproduce. Encrypt sensitive details with encryptor and send the password separately.
 
-## Reporting a Vulnerability
+## Scope
 
-**PLEASE DO NOT REPORT SECURITY VULNERABILITIES THROUGH PUBLIC GITHUB ISSUES.**
+In scope: the code in this repository and the format specification in [SPEC.md](SPEC.md).
 
-If you discover a security vulnerability, please follow responsible disclosure practices.
+Out of scope: vulnerabilities in browsers or operating systems, and attacks that require a compromised device.
 
-### How to Report
+## Supported versions
 
-**Email:** george@rauscher.xyz
-
-Please include:
-1. Type of vulnerability (e.g., XSS, Crypto weakness)
-2. Location (file path, line number if known)
-3. Proof of Concept (steps to reproduce)
-4. Impact assessment
-
-### Response Policy
-
-We appreciate your report and will investigate the issue as soon as possible. We ask for a reasonable timeframe to fix the issue before any public disclosure.
-
-**Note:** This is an open-source project maintained on a best-effort basis. We do not guarantee specific response times.
-
-### Bug Bounty
-
-We do **NOT** have a paid bug bounty program.
-
-## Security Best Practices
-
-### For Users
-
-**Strong Passwords**
-- Minimum 16 characters recommended
-- Use a password manager
-- Never reuse passwords
-
-**Safe Usage**
-- Use HTTPS only
-- Don't share passwords via insecure channels
-- Delete sensitive data after use
-
-### For Developers / Self-Hosters
-
-**Deployment Checklist**
-- [ ] Keep software updated (latest version)
-- [ ] Use HTTPS (SSL/TLS)
-- [ ] Configure web server headers correctly (HSTS, CSP)
-- [ ] Restrict access to sensitive files (.env, .git)
-
-## Disclaimer
-
-This software is provided "as is" without warranty of any kind. The authors are not liable for any damages arising from the use of this software. Use at your own risk.
+| Version | Supported |
+|---|---|
+| 3.x | Yes |
+| 2.x | Decryption only, with version 3 |

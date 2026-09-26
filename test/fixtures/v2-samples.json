@@ -1,0 +1,12 @@
+{
+  "note": "Created with the unmodified code of encryptor.app 2.2.0. Used to verify that version 3 still decrypts version 2 data.",
+  "password": "version-2-sample-password",
+  "text": "Sample text encrypted with encryptor.app 2.2.",
+  "ciphertext": "P0ld1DonUjlmMlyp6+9syuDqCec71M64tdgA5tBrAcVO/uYzBFgPFf2ww32FdB/Ync+/0tdXZbAduzb/vfAH0cBK3hcKM1TVLuQV5ySvPvfoBgdemjEu85A=",
+  "file": {
+    "path": "v2-sample.encrypted",
+    "name": "sample.bin",
+    "size": 200000,
+    "pattern": "(i * 7 + 3) & 255"
+  }
+}
